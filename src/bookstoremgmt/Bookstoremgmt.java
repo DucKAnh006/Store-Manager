@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bookstoremgmt;
 
 import bookstoremgmt.view.MainMenu;
@@ -12,7 +7,7 @@ import bookstoremgmt.view.MainMenu;
  * This application provides a console-based interface for managing
  * books, authors, customers, and orders in a bookstore.
  * 
- * @author FA25_PRO192_SE2002_Group4
+ * @author Nguyen Tran Duc Anh
  */
 public class Bookstoremgmt {
 

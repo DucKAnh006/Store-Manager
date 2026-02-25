@@ -9,7 +9,7 @@ import bookstoremgmt.model.OrderDetail;
  * Xu ly doc/ghi file orderdetail.txt voi cau truc du lieu Map.
  * Key = orderId, Value = List<OrderDetail>
  *
- * @author FA25_PRO192_SE2002_Group4
+ * @author Nguyen Tran Duc Anh
  */
 public class OrderDetailRepository {
     private static final String FILE_ORDERDETAILS = "src/resource/data/orderdetail.txt";

@@ -7,9 +7,7 @@ import bookstoremgmt.model.OrderDetail;
 import bookstoremgmt.model.Order.OrderStatus;
 import bookstoremgmt.repository.OrderRepository;
 import bookstoremgmt.repository.OrderDetailRepository;
-import bookstoremgmt.service.IBookService;
 import bookstoremgmt.service.IOrderService;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +18,7 @@ import java.util.stream.Collectors;
 
 /**
  *
- * @author FA25_PRO192_SE2002_Group4
+ * @author Nguyen Tran Duc Anh
  */
 
 public class OrderServiceImpl implements IOrderService {

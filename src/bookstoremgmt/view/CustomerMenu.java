@@ -1,16 +1,15 @@
 package bookstoremgmt.view;
 
-/**
- *
- * @author FA25_PRO192_SE2002_Group4
- */
 import java.util.List;
 import java.util.ArrayList;
-
 import bookstoremgmt.service.impl.CustomerServiceImpl;
 import bookstoremgmt.model.Customer;
 import bookstoremgmt.model.Order;
 
+/**
+ *
+ * @author Nguyen Tran Duc Anh
+ */
 public class CustomerMenu extends BaseMenu {
     private final CustomerServiceImpl customerService = new CustomerServiceImpl();
 

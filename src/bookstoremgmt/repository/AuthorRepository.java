@@ -1,18 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bookstoremgmt.repository;
 
 import java.io.*;
 import java.util.*;
-
 import bookstoremgmt.model.Author;
 
 /**
  *
- * @author FA25_PRO192_SE2002_Group4
+ * @author Nguyen Tran Duc Anh
  */
 public class AuthorRepository {
     private static final String FILE_AUTHOR = "src" + File.separator + "resource" + File.separator + "data"

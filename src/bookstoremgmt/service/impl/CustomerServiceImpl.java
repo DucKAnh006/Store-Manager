@@ -4,17 +4,13 @@ import bookstoremgmt.model.Customer;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
 import bookstoremgmt.repository.CustomerRepository;
-import bookstoremgmt.repository.OrderRepository;
 import bookstoremgmt.service.IService;
 import bookstoremgmt.model.Order;
 
 /**
  *
- * @author FA25_PRO192_SE2002_Group4
+ * @author Nguyen Tran Duc Anh
  */
 
 public class CustomerServiceImpl implements IService<Customer> {

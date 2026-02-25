@@ -13,7 +13,7 @@ import bookstoremgmt.model.Customer;
 
 /**
  *
- * @author FA25_PRO192_SE2002_Group4
+ * @author Nguyen Tran Duc Anh
  */
 public class CustomerRepository {
     private static String FILE_CUSTOMERS = "src/resource/data/customer.txt";

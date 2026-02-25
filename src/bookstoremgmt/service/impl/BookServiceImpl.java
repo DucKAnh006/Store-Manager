@@ -1,15 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bookstoremgmt.service.impl;
 
 import bookstoremgmt.model.Author;
-/**
- *
- * @author FA25_PRO192_SE2002_Group4
- */
 import bookstoremgmt.model.Book;
 import bookstoremgmt.repository.BookRepository;
 import bookstoremgmt.service.IBookService;
@@ -18,6 +9,10 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ *
+ * @author Nguyen Tran Duc Anh
+ */
 public class BookServiceImpl implements IBookService {
     List<Book> bookList = new ArrayList<>();
     private Map<String, Book> bookMap = new HashMap<>();

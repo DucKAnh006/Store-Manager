@@ -1,28 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bookstoremgmt.view;
 
 import bookstoremgmt.model.Author;
-/**
- *
- * @author FA25_PRO192_SE2002_Group4
- */
 import bookstoremgmt.model.Book;
-import bookstoremgmt.repository.BookRepository;
 import bookstoremgmt.service.impl.BookServiceImpl;
 import bookstoremgmt.service.impl.AuthorServiceImpl;
-import bookstoremgmt.repository.AuthorRepository;
 import java.util.List;
-import java.util.Map;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
-import java.time.LocalDate;
 
+/**
+ *
+ * @author Nguyen Tran Duc Anh
+ */
 public class BookMenu extends BaseMenu {
     private final Scanner sc = new Scanner(System.in);
     private final BookServiceImpl bookService = new BookServiceImpl();

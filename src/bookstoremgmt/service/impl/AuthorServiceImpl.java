@@ -2,14 +2,13 @@ package bookstoremgmt.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import bookstoremgmt.model.Author;
 import bookstoremgmt.repository.AuthorRepository;
 import bookstoremgmt.service.IService;
 
 /**
  *
- * @author FA25_PRO192_SE2002_Group4
+ * @author Nguyen Tran Duc Anh
  */
 
 public class AuthorServiceImpl implements IService<Author> {

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bookstoremgmt.repository;
 
 import java.io.BufferedReader;
@@ -15,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.nio.file.Path;
 import java.nio.file.Files;
-
 import bookstoremgmt.model.Book;
 import bookstoremgmt.service.impl.AuthorServiceImpl;
 import bookstoremgmt.model.Author;
