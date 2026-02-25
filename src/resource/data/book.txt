@@ -1,0 +1,21 @@
+NA001-001|Cho Toi Xin Mot Ve Di Tuoi Tho|110.50|150|C|NXB Tre|2008|Vietnamese|Cau chuyen ve tuoi tho.
+NA001-002|Mat Biec|125.00|200|C|NXB Tre|1990|Vietnamese|Mot cau chuyen tinh buon.
+NA001-003|Toi Thay Hoa Vang Tren Co Xanh|130.00|180|C|NXB Tre|2010|Vietnamese|Ky uc tuoi tho o lang que.
+NA001-004|Co Gai Den Tu Hom Qua|99.00|120|C|NXB Tre|1989|Vietnamese|Moi tinh hoc tro.
+NA001-005|Ngoi Khoc Tren Cay|140.75|100|C|NXB Tre|2013|Vietnamese|Tinh yeu lang man.
+HM002-001|Rung Na Uy|150.00|300|A|NXB Van Hoc|1987|Vietnamese|Noi mat mat va tinh duc.
+HM002-002|Kafka Ben Bo Bien|180.50|250|A|NXB Van Hoc|2002|Vietnamese|Chu nghia hien thuc huyen ao.
+HM002-003|1Q84|250.00|200|A|NXB Van Hoc|2009|Vietnamese|Mot the gioi song song.
+JR003-001|Harry Potter and the Philosopher's Stone|290.00|500|D|Bloomsbury|1997|English|The first book in the series.
+JR003-002|Harry Potter and the Chamber of Secrets|290.00|450|D|Bloomsbury|1998|English|The second book in the series.
+JR003-003|Harry Potter and the Prisoner of Azkaban|310.50|400|D|Bloomsbury|1999|English|The third book in the series.
+JR003-004|Harry Potter and the Goblet of Fire|350.00|350|D|Bloomsbury|2000|English|The fourth book in the series.
+JR003-005|Harry Potter and the Order of the Phoenix|420.00|300|D|Bloomsbury|2003|English|The fifth book in the series.
+YH004-001|Sapiens: A Brief History of Humankind|380.00|400|B|Harper|2011|English|A history of humankind.
+YH004-002|Homo Deus: A Brief History of Tomorrow|390.50|350|B|Harper|2015|English|A look into the future.
+DB005-001|The Da Vinci Code|320.00|300|E|Doubleday|2003|English|A mystery thriller.
+DB005-002|Angels & Demons|310.00|280|E|Doubleday|2000|English|A race against time.
+DB005-003|Inferno|330.00|250|E|Doubleday|2013|English|Based on Dante's Inferno.
+GO006-001|Nineteen Eighty-Four|250.50|400|H|Secker & Warburg|1949|English|A dystopian novel.
+GO006-002|Animal Farm|210.00|450|H|Secker & Warburg|1945|English|An allegorical novella.
+GO006-003|Down and Out in Paris and London|230.00|150|H|Secker & Warburg|1933|English|A memoir.
