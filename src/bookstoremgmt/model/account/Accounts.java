@@ -6,7 +6,7 @@ package bookstoremgmt.model.account;
  */
 public abstract class Accounts {
     private String name; // Name of the account holder
-    private String userId; // Unique user ID for login
+    private String account; // Unique user ID for login
     private String password; // Password for authentication
 
     /**
@@ -16,10 +16,10 @@ public abstract class Accounts {
     }
 
     /**
-     * Constructor for Accounts with userId and password. Name can be set later.
+     * Constructor for Accounts with account and password. Name can be set later.
      */
-    public Accounts(String userId, String password) {
-        this.userId = userId;
+    public Accounts(String account, String password) {
+        this.account = account;
         this.password = password;
     }
 
@@ -27,9 +27,9 @@ public abstract class Accounts {
      * Constructor for Accounts with all fields. Useful for creating a complete
      * account in one step.
      */
-    public Accounts(String name, String userId, String password) {
+    public Accounts(String name, String account, String password) {
         this.name = name;
-        this.userId = userId;
+        this.account = account;
         this.password = password;
     }
 
@@ -42,12 +42,12 @@ public abstract class Accounts {
         this.name = name;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getaccount() {
+        return account;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setaccount(String account) {
+        this.account = account;
     }
 
     public String getPassword() {
