@@ -1,5 +1,7 @@
 package bookstoremgmt.model.product;
 
+import java.time.LocalDate;
+
 /**
  * Feedback class represents customer feedback for products in the bookstore
  * management system.
@@ -14,7 +16,7 @@ public class Feedback {
     private String customerId; // Identifier for the customer who provided the feedback
     private String comment; // Customer's comment about the product
     private int rating; // Customer's rating for the product (e.g., 1 to 5)
-    private String date; // Date when the feedback was provided
+    private LocalDate date; // Date when the feedback was provided
 
     /**
      * Default constructor initializes the feedback with default values
@@ -26,7 +28,7 @@ public class Feedback {
      * Parameterized constructor to initialize all properties of the feedback
      */
     public Feedback(String feedbackId, String productId, String customerId, String comment, int rating,
-            String date) {
+            LocalDate date) {
         this.feedbackId = feedbackId;
         this.productId = productId;
         this.customerId = customerId;
@@ -76,11 +78,11 @@ public class Feedback {
         this.rating = rating;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 }

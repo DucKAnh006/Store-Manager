@@ -15,6 +15,7 @@ public class Order {
     private LocalDate orderDate; // Date when the order was placed
     private final List<OrderDetail> orderDetails; // List of order details (items in the order)
     private OrderStatus status; // Current status of the order (e.g., PENDING, CONFIRMED, SHIPPED, DELIVERED, CANCELLED)
+    private Voucher voucher; // Optional voucher applied to the order for discounts
 
     // Enum for order status
     public enum OrderStatus {
@@ -121,10 +122,15 @@ public class Order {
      * @return the total amount for the order
      */
     public double getTotalAmount() {
-        return orderDetails.stream() // Use stream to calculate total amount from order details
+        double total = orderDetails.stream() // Use stream to calculate total amount from order details
                 .filter(detail -> detail != null) // Filter out any null details to prevent NullPointerException
                 .mapToDouble(OrderDetail::getTotalPrice) // Map each order detail to its total price
                 .sum(); // Sum up the total prices to get the total amount for the order
+        if (voucher != null && voucher.getMinOrderValue() <= total && voucher.getExpirationDate().isAfter(LocalDate.now())) {
+            double discount = voucher.isPercentage() ? total * voucher.getDiscountValue() / 100 : voucher.getDiscountValue();
+            total -= discount;
+        }
+        return total;
     }
 
     /**
