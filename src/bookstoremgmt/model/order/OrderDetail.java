@@ -11,7 +11,7 @@ public class OrderDetail {
     private int quantity; // Quantity of the product ordered
     private double totalPrice; // Total price for this order detail (calculated as price * quantity - discount)
     private double price; // Price of the product at the time of order
-    private double discount; // Discount applied to this order detail (as a percentage)
+    private int discount; // Discount applied to this order detail (as a percentage)
 
     /**
      * Default constructor initializes the order detail with default values
@@ -22,7 +22,7 @@ public class OrderDetail {
     /**
      * Parameterized constructor to initialize all properties of the order detail
      */
-    public OrderDetail(Product product, int quantity, double price, double discount) {
+    public OrderDetail(Product product, int quantity, double price, int discount) {
         this.product = product;
         this.quantity = quantity;
         this.price = price; 

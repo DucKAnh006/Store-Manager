@@ -13,8 +13,6 @@ public class CartItem {
     private int quantity; // Quantity of the product in the cart
     private double totalPrice; // Total price for this cart item (calculated as product price * quantity * (1 - discount))
     private boolean selected; // Indicates whether this cart item is selected for checkout
-    private double price; // The price of the product at the time it was added to the cart (used for consistency in total price calculation)
-    private double discount; // The discount applied to the product at the time it was added to the cart (used for consistency in total price calculation)
 
     /**
      * Default constructor initializes the cart item with default values. Total price is calculated based on the product and quantity.
@@ -68,7 +66,7 @@ public class CartItem {
     private void updateTotalPrice() {
         if (product != null) {
             // Use the price and discount stored in the cart item for consistency, rather than fetching from the product which may change
-            this.totalPrice = price * quantity * (1 - discount / 100.0);
+            this.totalPrice = product.getPrice() * quantity * (1 - product.getDiscount() / 100.0);
         } else {
             this.totalPrice = 0;
         }
