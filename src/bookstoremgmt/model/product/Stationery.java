@@ -1,5 +1,7 @@
 package bookstoremgmt.model.product;
 
+import bookstoremgmt.model.catalog.Supplier;
+
 /**
  * Represents non-book items like pens, rulers, toys, and souvenirs.
  * Extends the abstract Product class.
@@ -22,9 +24,9 @@ public class Stationery extends Product {
      */
     public Stationery(String id, String name, double price, int stockQuantity,
             String category, int status, int Discount, int totalSales, int totalStarRatings,
-            int numberOfRatings, double averageRating, String manufacturer, String material) {
+            int numberOfRatings, double averageRating, String manufacturer, String material, Supplier supplier) {
         super(id, name, price, stockQuantity, category, status, Discount, totalSales,
-                totalStarRatings, numberOfRatings, averageRating);
+                totalStarRatings, numberOfRatings, averageRating, supplier);
         this.manufacturer = manufacturer;
         this.material = material;
     }

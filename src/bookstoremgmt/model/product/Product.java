@@ -1,5 +1,7 @@
 package bookstoremgmt.model.product;
 
+import bookstoremgmt.model.catalog.Supplier;
+
 /**
  * Abstract base class representing a generic product in the bookstore.
  * Contains common attributes shared by Books, Combos, and Stationery.
@@ -18,6 +20,7 @@ public abstract class Product {
     private int numberOfRatings; // Number of ratings received for the product
     private double averageRating; // Average rating calculated from totalStarRatings and numberOfRatings
     private int discount; // Discount percentage for the product
+    private Supplier supplier; // ID of the supplier providing the product
 
     /**
      * Enum representing the status of a book product.
@@ -47,7 +50,7 @@ public abstract class Product {
      */
     public Product(String id, String name, double price, int stockQuantity,
             String category, int status, int Discount, int totalSales, int totalStarRatings,
-            int numberOfRatings, double averageRating) {
+            int numberOfRatings, double averageRating, Supplier supplier) {
         this.id = id;
         this.name = name;
         setPrice(price);
@@ -59,6 +62,7 @@ public abstract class Product {
         this.totalStarRatings = totalStarRatings;
         this.numberOfRatings = numberOfRatings;
         this.averageRating = averageRating;
+        this.supplier = supplier;
     }
 
     // Getters and setters for all attributes
@@ -179,4 +183,13 @@ public abstract class Product {
     public void setDiscount(int discount) {
         this.discount = discount;
     }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
+
 }

@@ -1,6 +1,7 @@
 package bookstoremgmt.model.product;
 
 import bookstoremgmt.model.catalog.Author;
+import bookstoremgmt.model.catalog.Supplier;
 
 /**
  * Book class represents a book product in the bookstore management system. It
@@ -36,9 +37,9 @@ public class Book extends Product {
     public Book(String id, String title, Author author, double price, int stockQuantity,
             String category, String publisher, int yearPublished,
             String language, String description, int status, int Discount, int totalSales, int totalStarRatings,
-            int numberOfRatings, double averageRating) {
+            int numberOfRatings, double averageRating, Supplier supplier) {
         super(id, title, price, stockQuantity, category, status, Discount, totalSales, totalStarRatings,
-                numberOfRatings, averageRating);
+                numberOfRatings, averageRating, supplier);
         this.author = author;
         this.publisher = publisher;
         this.yearPublished = yearPublished;
