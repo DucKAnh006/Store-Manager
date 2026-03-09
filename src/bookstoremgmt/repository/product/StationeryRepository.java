@@ -22,7 +22,7 @@ public class StationeryRepository {
     }
 
     /**
-     * Closes the database connection if it is open.
+     * Adds a stationery from the database. This method ensures that the stationery is added from both the BM_Product and BM_Stationery tables. If either addition fails, an exception is thrown to indicate the failure.
      * @param stationery
      * @throws SQLException
      */

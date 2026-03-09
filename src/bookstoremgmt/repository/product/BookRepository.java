@@ -22,7 +22,7 @@ public class BookRepository {
     }
 
     /**
-     * Closes the database connection if it is open.
+     * Adds a book from the database. This method ensures that the book is added from both the BM_Book and BM_Combo tables. If either addition fails, an exception is thrown to indicate the failure.
      * @param book
      * @throws SQLException
      */
