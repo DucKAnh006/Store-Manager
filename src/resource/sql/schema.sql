@@ -98,13 +98,13 @@ CREATE TABLE BM_Combo (
 
 CREATE TABLE BM_ComboDetail (
     quantity INT CHECK (quantity > 0),
-    product_id VARCHAR(10) NOT NULL,
+    combo_product_id VARCHAR(10) NOT NULL,
     combo_id VARCHAR(10) NOT NULL,
 
     PRIMARY KEY (product_id, combo_id),
 
     FOREIGN KEY (combo_id) REFERENCES BM_Combo (combo_id),
-    FOREIGN KEY (product_id) REFERENCES BM_Product (product_id) 
+    FOREIGN KEY (combo_product_id) REFERENCES BM_Product (product_id) 
 );
 
 CREATE TABLE BM_CART (
