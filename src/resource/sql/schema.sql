@@ -107,14 +107,14 @@ CREATE TABLE BM_ComboDetail (
     FOREIGN KEY (combo_product_id) REFERENCES BM_Product (product_id) 
 );
 
-CREATE TABLE BM_CART (
+CREATE TABLE BM_Cart (
     customer_id VARCHAR(10) NOT NULL,
     cart_id VARCHAR(10) PRIMARY KEY NOT NULL,
 
     FOREIGN KEY (customer_id) REFERENCES BM_Customer (customer_id)
 );
 
-CREATE TABLE BM_CARTITEM (
+CREATE TABLE BM_CartItem (
     cart_id VARCHAR(10) NOT NULL,
     product_id VARCHAR(10) NOT NULL,
     quantity INT DEFAULT 1,
@@ -129,7 +129,7 @@ CREATE TABLE BM_CARTITEM (
 
 CREATE TABLE BM_Voucher (
     code VARCHAR(10) PRIMARY KEY,
-    ispercentage BIT NOT NULL,
+    is_percentage BIT NOT NULL,
     discount_value DECIMAL(10, 2) NOT NULL,
     minimum_order_amount DECIMAL(10, 2) NOT NULL,
     expiration_date DATE
@@ -171,7 +171,7 @@ CREATE TABLE BM_UsedVoucher (
 );
 
 CREATE TABLE BM_Feedback (
-    feedback_id INT IDENTITY(1,1) PRIMARY KEY,
+    feedback_id VARCHAR(10) PRIMARY KEY,
     product_id VARCHAR(10) NOT NULL,
     customer_id VARCHAR(10) NOT NULL,
     rating INT CHECK (rating >= 1 AND rating <= 5),

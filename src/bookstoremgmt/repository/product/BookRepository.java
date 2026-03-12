@@ -112,7 +112,7 @@ public class BookRepository {
 
             connection.commit(); // Commit transaction if both deletions succeed
         } catch (SQLException e) {
-            throw new SQLException("Failed to delete books.", e); // Throw an exception with the book ID for better debugging
+            throw new SQLException("Failed to delete books.", e); // Throw an exception for better debugging
         }
     }
 
@@ -166,9 +166,9 @@ public class BookRepository {
             query.setString(12, book.getSupplier().getId());
 
             int rowsAffected = query.executeUpdate(); // Execute the SQL query and get the number of rows affected
-            // Execute the SQL query and check if the insertion was successful. If the insertion fails, throw an exception with the book ID for better debugging
+            // Execute the SQL query and check if the insertion was successful. If the insertion fails, throw an exception for better debugging
             if (rowsAffected == 0) {
-                throw new SQLException("Failed to insert product details into database."); // Throw an exception with the book ID for better debugging
+                throw new SQLException("Failed to insert product details into database."); // Throw an exception for better debugging
             }
         } catch (SQLException e) {
             throw new SQLException("Failed to insert book with ID: " + book.getId(), e); // Throw an exception with the book ID for better debugging
@@ -208,11 +208,11 @@ public class BookRepository {
             // Loop through the results of the batch execution and check if any insertion failed. If any
             for (int result : rowsAffected) {
                 if (result == 0) {
-                    throw new SQLException("Failed to insert product details into database."); // Throw an exception with the book ID for better debugging
+                    throw new SQLException("Failed to insert product details into database."); // Throw an exception for better debugging
                 }
             }
         } catch (SQLException e) {
-            throw new SQLException("Failed to insert books.", e); // Throw an exception with the book ID for better debugging
+            throw new SQLException("Failed to insert books.", e); // Throw an exception for better debugging
         }
     }
 
@@ -234,9 +234,9 @@ public class BookRepository {
             query.setString(6, book.getDescription());
 
             int rowsAffected = query.executeUpdate(); // Execute the SQL query and get the number of rows affected
-            // Execute the SQL query and check if the insertion was successful. If the insertion fails, throw an exception with the book ID for better debugging
+            // Execute the SQL query and check if the insertion was successful. If the insertion fails, throw an exception for better debugging
             if (rowsAffected == 0) {
-                throw new SQLException("Failed to insert book details into database."); // Throw an exception with the book ID for better debugging
+                throw new SQLException("Failed to insert book details into database."); // Throw an exception for better debugging
             }
         } catch (SQLException e) {
             throw new SQLException("Failed to insert book with ID: " + book.getId(), e); // Throw an exception with the book ID for better debugging
@@ -265,14 +265,14 @@ public class BookRepository {
             }
 
             int[] rowsAffected = query.executeBatch(); // Execute the batch of SQL statements and get the number of rows affected for each statement
-            // Loop through the results of the batch execution and check if any insertion failed. If any insertion fails, throw an exception with the book ID for better debugging
+            // Loop through the results of the batch execution and check if any insertion failed. If any insertion fails, throw an exception for better debugging
             for (int result : rowsAffected) {
                 if (result == 0) {
-                    throw new SQLException("Failed to insert product details into database."); // Throw an exception with the book ID for better debugging
+                    throw new SQLException("Failed to insert product details into database."); // Throw an exception for better debugging
                 }
             }
         } catch (SQLException e) {
-            throw new SQLException("Failed to insert books.", e); // Throw an exception with the book ID for better debugging
+            throw new SQLException("Failed to insert books.", e); // Throw an exception for better debugging
         }
     }
 
@@ -313,14 +313,14 @@ public class BookRepository {
             }
 
             int[] rowsAffected = query.executeBatch(); // Execute the batch of SQL statements and get the number of rows affected for each statement    
-            // Loop through the results of the batch execution and check if any deletion failed. If any deletion fails, throw an exception with the book ID for better debugging
+            // Loop through the results of the batch execution and check if any deletion failed. If any deletion fails, throw an exception for better debugging
             for (int result : rowsAffected) {
                 if (result == 0) {
-                    throw new SQLException("Failed to delete product from BM_Product table."); // Throw an exception with the book ID for better debugging
+                    throw new SQLException("Failed to delete product from BM_Product table."); // Throw an exception for better debugging
                 }
             }
         } catch (SQLException e) {
-            throw new SQLException("Failed to delete books.", e); // Throw an exception with the book ID for better debugging
+            throw new SQLException("Failed to delete books.", e); // Throw an exception for better debugging
         }
     }
 
@@ -359,14 +359,14 @@ public class BookRepository {
             }
 
             int[] rowsAffected = query.executeBatch(); // Execute the batch of SQL statements and get the number of rows affected for each statement
-            // Loop through the results of the batch execution and check if any deletion failed. If any deletion fails, throw an exception with the book ID for better debugging
+            // Loop through the results of the batch execution and check if any deletion failed. If any deletion fails, throw an exception for better debugging
             for (int result : rowsAffected) {
                 if (result == 0) {
                     throw new SQLException("Failed to delete product from BM_Book table."); // Throw a generic exception for multiple books, as it may be difficult to identify which specific book caused the failure
                 }
             }
         } catch (SQLException e) {
-            throw new SQLException("Failed to delete books.", e); // Throw an exception with the book ID for better debugging
+            throw new SQLException("Failed to delete books.", e); // Throw an exception for better debugging
         }
     }
 
@@ -396,9 +396,9 @@ public class BookRepository {
             query.setString(12, book.getId());
 
             int rowsAffected = query.executeUpdate(); // Execute the SQL query and get the number of rows affected
-            // Execute the SQL query and check if the update was successful. If the update fails, throw an exception with the book ID for better debugging
+            // Execute the SQL query and check if the update was successful. If the update fails, throw an exception for better debugging
             if (rowsAffected == 0) {
-                throw new SQLException("Failed to update product details in database."); // Throw an exception with the book ID for better debugging
+                throw new SQLException("Failed to update product details in database."); // Throw an exception for better debugging
             }
         } catch (SQLException e) {
             throw new SQLException("Failed to update book with ID: " + book.getId(), e); // Throw an exception with the book ID for better debugging
@@ -423,9 +423,9 @@ public class BookRepository {
             query.setString(6, book.getId());
 
             int rowsAffected = query.executeUpdate(); // Execute the SQL query and get the number of rows affected
-            // Execute the SQL query and check if the update was successful. If the update fails, throw an exception with the book ID for better debugging
+            // Execute the SQL query and check if the update was successful. If the update fails, throw an exception for better debugging
             if (rowsAffected == 0) {
-                throw new SQLException("Failed to update book details in database."); // Throw an exception with the book ID for better debugging
+                throw new SQLException("Failed to update book details in database."); // Throw an exception for better debugging
             }
         } catch (SQLException e) {
             throw new SQLException("Failed to update book with ID: " + book.getId(), e); // Throw an exception with the book ID for better debugging

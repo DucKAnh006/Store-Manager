@@ -116,9 +116,9 @@ public class ComboRepository {
             query.setString(12, combo.getSupplier().getId());
 
             int rowsAffected = query.executeUpdate(); // Execute the SQL query and get the number of rows affected
-            // Execute the SQL query and check if the insertion was successful. If the insertion fails, throw an exception with the combo ID for better debugging
+            // Execute the SQL query and check if the insertion was successful. If the insertion fails, throw an exception for better debugging
             if (rowsAffected == 0) {
-                throw new SQLException("Failed to insert product details into database."); // Throw an exception with the combo ID for better debugging
+                throw new SQLException("Failed to insert product details into database."); // Throw an exception for better debugging
             }
         } catch (SQLException e) {
             throw new SQLException("Failed to insert combo with ID: " + combo.getId(), e); // Throw an exception with the combo ID for better debugging
@@ -137,9 +137,9 @@ public class ComboRepository {
             // Set the parameters for the SQL query using the combo's specific details
             query.setString(1, combo.getId());
             int rowsAffected = query.executeUpdate(); // Execute the SQL query and get the number of rows affected
-            // Execute the SQL query and check if the insertion was successful. If the insertion fails, throw an exception with the combo ID for better debugging
+            // Execute the SQL query and check if the insertion was successful. If the insertion fails, throw an exception for better debugging
             if (rowsAffected == 0) {
-                throw new SQLException("Failed to insert combo details into database."); // Throw an exception with the combo ID for better debugging
+                throw new SQLException("Failed to insert combo details into database."); // Throw an exception for better debugging
             }
         } catch (SQLException e) {
             throw new SQLException("Failed to insert combo with ID: " + combo.getId(), e); // Throw an exception with the combo ID for better debugging
@@ -208,9 +208,9 @@ public class ComboRepository {
             query.setString(12, combo.getId());
 
             int rowsAffected = query.executeUpdate(); // Execute the SQL query and get the number of rows affected
-            // Execute the SQL query and check if the update was successful. If the update fails, throw an exception with the combo ID for better debugging
+            // Execute the SQL query and check if the update was successful. If the update fails, throw an exception for better debugging
             if (rowsAffected == 0) {
-                throw new SQLException("Failed to update product details in database."); // Throw an exception with the combo ID for better debugging
+                throw new SQLException("Failed to update product details in database."); // Throw an exception for better debugging
             }
         } catch (SQLException e) {
             throw new SQLException("Failed to update combo with ID: " + combo.getId(), e); // Throw an exception with the combo ID for better debugging

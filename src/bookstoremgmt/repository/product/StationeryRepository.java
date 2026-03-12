@@ -112,7 +112,7 @@ public class StationeryRepository {
 
             connection.commit(); // Commit transaction if both deletions succeed
         } catch (SQLException e) {
-            throw new SQLException("Failed to delete stationery.", e); // Throw an exception with the stationery ID for better debugging
+            throw new SQLException("Failed to delete stationery.", e); // Throw an exception for better debugging
         }
     }
 
@@ -166,9 +166,9 @@ public class StationeryRepository {
             query.setString(12, stationery.getSupplier().getId());
 
             int rowsAffected = query.executeUpdate(); // Execute the SQL query and get the number of rows affected
-            // Execute the SQL query and check if the insertion was successful. If the insertion fails, throw an exception with the stationery ID for better debugging
+            // Execute the SQL query and check if the insertion was successful. If the insertion fails, throw an exception for better debugging
             if (rowsAffected == 0) {
-                throw new SQLException("Failed to insert product details into database."); // Throw an exception with the stationery ID for better debugging
+                throw new SQLException("Failed to insert product details into database."); // Throw an exception for better debugging
             }
         } catch (SQLException e) {
             throw new SQLException("Failed to insert stationery with ID: " + stationery.getId(), e); // Throw an exception with the stationery ID for better debugging
@@ -208,11 +208,11 @@ public class StationeryRepository {
             // Loop through the results of the batch execution and check if any insertion failed. If any
             for (int result : rowsAffected) {
                 if (result == 0) {
-                    throw new SQLException("Failed to insert product details into database."); // Throw an exception with the stationery ID for better debugging
+                    throw new SQLException("Failed to insert product details into database."); // Throw an exception for better debugging
                 }
             }
         } catch (SQLException e) {
-            throw new SQLException("Failed to insert stationery.", e); // Throw an exception with the stationery ID for better debugging
+            throw new SQLException("Failed to insert stationery.", e); // Throw an exception for better debugging
         }
     }
 
@@ -230,9 +230,9 @@ public class StationeryRepository {
             query.setString(2, stationery.getManufacturer());
             query.setString(3, stationery.getMaterial());
             int rowsAffected = query.executeUpdate(); // Execute the SQL query and get the number of rows affected
-            // Execute the SQL query and check if the insertion was successful. If the insertion fails, throw an exception with the stationery ID for better debugging
+            // Execute the SQL query and check if the insertion was successful. If the insertion fails, throw an exception for better debugging
             if (rowsAffected == 0) {
-                throw new SQLException("Failed to insert stationery details into database."); // Throw an exception with the stationery ID for better debugging
+                throw new SQLException("Failed to insert stationery details into database."); // Throw an exception for better debugging
             }
         } catch (SQLException e) {
             throw new SQLException("Failed to insert stationery with ID: " + stationery.getId(), e); // Throw an exception with the stationery ID for better debugging
@@ -258,14 +258,14 @@ public class StationeryRepository {
             }
 
             int[] rowsAffected = query.executeBatch(); // Execute the batch of SQL statements and get the number of rows affected for each statement
-            // Loop through the results of the batch execution and check if any insertion failed. If any insertion fails, throw an exception with the stationery ID for better debugging
+            // Loop through the results of the batch execution and check if any insertion failed. If any insertion fails, throw an exception for better debugging
             for (int result : rowsAffected) {
                 if (result == 0) {
-                    throw new SQLException("Failed to insert product details into database."); // Throw an exception with the stationery ID for better debugging
+                    throw new SQLException("Failed to insert product details into database."); // Throw an exception for better debugging
                 }
             }
         } catch (SQLException e) {
-            throw new SQLException("Failed to insert stationery.", e); // Throw an exception with the stationery ID for better debugging
+            throw new SQLException("Failed to insert stationery.", e); // Throw an exception for better debugging
         }
     }
 
@@ -306,14 +306,14 @@ public class StationeryRepository {
             }
 
             int[] rowsAffected = query.executeBatch(); // Execute the batch of SQL statements and get the number of rows affected for each statement    
-            // Loop through the results of the batch execution and check if any deletion failed. If any deletion fails, throw an exception with the stationery ID for better debugging
+            // Loop through the results of the batch execution and check if any deletion failed. If any deletion fails, throw an exception for better debugging
             for (int result : rowsAffected) {
                 if (result == 0) {
-                    throw new SQLException("Failed to delete product from BM_Product table."); // Throw an exception with the stationery ID for better debugging
+                    throw new SQLException("Failed to delete product from BM_Product table."); // Throw an exception for better debugging
                 }
             }
         } catch (SQLException e) {
-            throw new SQLException("Failed to delete stationery.", e); // Throw an exception with the stationery ID for better debugging
+            throw new SQLException("Failed to delete stationery.", e); // Throw an exception for better debugging
         }
     }
 
@@ -352,14 +352,14 @@ public class StationeryRepository {
             }
 
             int[] rowsAffected = query.executeBatch(); // Execute the batch of SQL statements and get the number of rows affected for each statement
-            // Loop through the results of the batch execution and check if any deletion failed. If any deletion fails, throw an exception with the stationery ID for better debugging
+            // Loop through the results of the batch execution and check if any deletion failed. If any deletion fails, throw an exception for better debugging
             for (int result : rowsAffected) {
                 if (result == 0) {
                     throw new SQLException("Failed to delete product from BM_Stationery table."); // Throw a generic exception for multiple stationery, as it may be difficult to identify which specific stationery caused the failure
                 }
             }
         } catch (SQLException e) {
-            throw new SQLException("Failed to delete stationery.", e); // Throw an exception with the stationery ID for better debugging
+            throw new SQLException("Failed to delete stationery.", e); // Throw an exception for better debugging
         }
     }
 
@@ -389,9 +389,9 @@ public class StationeryRepository {
             query.setString(12, stationery.getId());
 
             int rowsAffected = query.executeUpdate(); // Execute the SQL query and get the number of rows affected
-            // Execute the SQL query and check if the update was successful. If the update fails, throw an exception with the stationery ID for better debugging
+            // Execute the SQL query and check if the update was successful. If the update fails, throw an exception for better debugging
             if (rowsAffected == 0) {
-                throw new SQLException("Failed to update product details in database."); // Throw an exception with the stationery ID for better debugging
+                throw new SQLException("Failed to update product details in database."); // Throw an exception for better debugging
             }
         } catch (SQLException e) {
             throw new SQLException("Failed to update stationery with ID: " + stationery.getId(), e); // Throw an exception with the stationery ID for better debugging
@@ -413,9 +413,9 @@ public class StationeryRepository {
             query.setString(3, stationery.getId());
 
             int rowsAffected = query.executeUpdate(); // Execute the SQL query and get the number of rows affected
-            // Execute the SQL query and check if the update was successful. If the update fails, throw an exception with the stationery ID for better debugging
+            // Execute the SQL query and check if the update was successful. If the update fails, throw an exception for better debugging
             if (rowsAffected == 0) {
-                throw new SQLException("Failed to update stationery details in database."); // Throw an exception with the stationery ID for better debugging
+                throw new SQLException("Failed to update stationery details in database."); // Throw an exception for better debugging
             }
         } catch (SQLException e) {
             throw new SQLException("Failed to update stationery with ID: " + stationery.getId(), e); // Throw an exception with the stationery ID for better debugging
