@@ -20,7 +20,7 @@ public class ComboRepository {
     }
 
     /**
-     * Adds a combo from the database. This method ensures that the combo is added from both the BM_Product and BM_Combo tables. If either addition fails, an exception is thrown to indicate the failure.
+     * Adds a combo to the database. This method ensures that the combo is added from both the BM_Product and BM_Combo tables. If either addition fails, an exception is thrown to indicate the failure.
      * @param combo
      * @throws SQLException
      */

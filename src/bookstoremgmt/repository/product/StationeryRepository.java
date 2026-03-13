@@ -22,7 +22,7 @@ public class StationeryRepository {
     }
 
     /**
-     * Adds a stationery from the database. This method ensures that the stationery is added from both the BM_Product and BM_Stationery tables. If either addition fails, an exception is thrown to indicate the failure.
+     * Adds a stationery to the database. This method ensures that the stationery is added from both the BM_Product and BM_Stationery tables. If either addition fails, an exception is thrown to indicate the failure.
      * @param stationery
      * @throws SQLException
      */
@@ -205,7 +205,7 @@ public class StationeryRepository {
             }
 
             int[] rowsAffected = query.executeBatch(); // Execute the batch of SQL statements and get the number of rows affected for each statement
-            // Loop through the results of the batch execution and check if any insertion failed. If any
+            // Loop through the results of the batch execution and check if any insertion failed. If any insertion fails, throw an exception for better debugging
             for (int result : rowsAffected) {
                 if (result == 0) {
                     throw new SQLException("Failed to insert product details into database."); // Throw an exception for better debugging
