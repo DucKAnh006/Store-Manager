@@ -43,9 +43,9 @@ public class FeedbackRepository {
                 query.setDate(6, sqlDate);
 
                 int rowsAffected = query.executeUpdate(); // Execute the SQL query and get the number of rows affected
-                // Execute the SQL query and check if the insertion was successful. If the insertion fails, throw an exception with the book ID for better debugging
+                // Execute the SQL query and check if the insertion was successful. If the insertion fails, throw an exception with the feedback ID for better debugging
                 if (rowsAffected == 0) {
-                    throw new SQLException("Failed to insert feedback details into database."); // Throw an exception with the book ID for better debugging
+                    throw new SQLException("Failed to insert feedback details into database."); // Throw an exception with the feedback ID for better debugging
                 }
             } catch (SQLException e) {
                 throw new SQLException("Failed to add feedback details.", e);  // Throw an exception for better debugging
@@ -99,7 +99,7 @@ public class FeedbackRepository {
                 query.setString(4, feedback.getFeedbackId());
 
                 int rowsAffected = query.executeUpdate();  // Execute the SQL query and get the number of rows affected
-                // Execute the SQL query and check if the insertion was successful. If the insertion fails, throw an exception for better debugging
+                // Execute the SQL query and check if the update was successful. If the insertion fails, throw an exception for better debugging
                 if (rowsAffected == 0) {
                     throw new SQLException("No feedback found to update."); // Throw an exception for better debugging
                 }

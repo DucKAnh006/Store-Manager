@@ -22,7 +22,7 @@ public class BookRepository {
     }
 
     /**
-     * Adds a book from the database. This method ensures that the book is added from both the BM_Book and BM_Combo tables. If either addition fails, an exception is thrown to indicate the failure.
+     * Adds a book to the database. This method ensures that the book is added from both the BM_Book and BM_Product tables. If either addition fails, an exception is thrown to indicate the failure.
      * @param book
      * @throws SQLException
      */
@@ -205,7 +205,7 @@ public class BookRepository {
             }
 
             int[] rowsAffected = query.executeBatch(); // Execute the batch of SQL statements and get the number of rows affected for each statement
-            // Loop through the results of the batch execution and check if any insertion failed. If any
+            // Loop through the results of the batch execution and check if any insertion failed. If any insertion fails, throw an exception for better debugging
             for (int result : rowsAffected) {
                 if (result == 0) {
                     throw new SQLException("Failed to insert product details into database."); // Throw an exception for better debugging
