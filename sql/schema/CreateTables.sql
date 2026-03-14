@@ -2,7 +2,7 @@ CREATE TABLE BM_Account (
     account_id VARCHAR(10) PRIMARY KEY NOT NULL,
     name VARCHAR(255) NOT NULL,
     account VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(20) NOT NULL,
+    password VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE BM_Customer (
@@ -32,7 +32,7 @@ CREATE TABLE BM_Product (
     price DECIMAL(10, 2) NOT NULL,
     stock_quantity INT DEFAULT 0,
     category VARCHAR(100),
-    status VARCHAR(50), 
+    product_type INT NOT NULL CHECK (product_type >= 0 AND product_type <= 2),
     total_sales INT DEFAULT 0, 
     total_star_ratings INT DEFAULT 0,
     number_of_ratings INT DEFAULT 0,
@@ -52,6 +52,7 @@ CREATE TABLE BM_Books (
     product_id VARCHAR(10) PRIMARY KEY,
     author_id VARCHAR(10) NOT NULL,
     publisher VARCHAR(150) NOT NULL,
+    status INT NOT NULL CHECK (status >= 0 AND status <= 3),
     year_published INT CHECK (year_published <= YEAR(GETDATE())),
     language VARCHAR(50) NOT NULL,
     description TEXT NOT NULL, 
@@ -80,7 +81,7 @@ CREATE TABLE BM_ComboDetail (
     combo_product_id VARCHAR(10) NOT NULL,
     combo_id VARCHAR(10) NOT NULL,
 
-    PRIMARY KEY (product_id, combo_id),
+    PRIMARY KEY (combo_product_id, combo_id),
 
     FOREIGN KEY (combo_id) REFERENCES BM_Combo (combo_id),
     FOREIGN KEY (combo_product_id) REFERENCES BM_Product (product_id) 
@@ -115,7 +116,7 @@ CREATE TABLE BM_Voucher (
 );
 
 CREATE TABLE BM_Order (
-    order_id VARCHAR(10) NOT NULL,
+    order_id VARCHAR(10) PRIMARY KEY NOT NULL,
     customer_id VARCHAR(10),
     order_date DATE,
     status INT,

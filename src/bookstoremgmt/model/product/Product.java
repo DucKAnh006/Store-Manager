@@ -9,12 +9,13 @@ import bookstoremgmt.model.catalog.Supplier;
  * @author Nguyen Tran Duc Anh
  */
 public abstract class Product {
+
     private String id; // Unique identifier for the product
     private String name; // Name of the product
     private double price; // Price of the product
     private int stockQuantity; // Quantity of the product available in stock
     private String category; // Category of the product (e.g., Fiction, Non-Fiction, Combo, Stationery)
-    private BookStatus status; // Status of the product (e.g., RUMOUR, AVAILABLE, OUT_OF_STOCK, DISCONTINUED)
+    private ProductType productType; // Type of product 
     private int totalSales; // Total number of sales for the product    
     private int totalStarRatings; // Total star ratings accumulated for the product
     private int numberOfRatings; // Number of ratings received for the product
@@ -23,41 +24,43 @@ public abstract class Product {
     private Supplier supplier; // ID of the supplier providing the product
 
     /**
-     * Enum representing the status of a book product.
+     * Enum representing the type of a product.
      */
-    public enum BookStatus {
-        RUMOUR, AVAILABLE, OUT_OF_STOCK, DISCONTINUED
+    public enum ProductType {
+        BOOK, STATIONERY, COMBO
     }
 
     /**
      * Default constructor for framework compatibility.
      */
-    public Product() {
+    public Product(int productType) {
+        setProductType(productType);
     }
 
     /**
      * Constructor to initialize essential product attributes.
      */
-    public Product(String id, String name, double price, int stockQuantity) {
+    public Product(String id, String name, double price, int stockQuantity, int productType) {
         this.id = id;
         this.name = name;
         setPrice(price);
         setStockQuantity(stockQuantity);
+        setProductType(productType);
     }
 
     /**
      * Full constructor to initialize all product attributes.
      */
     public Product(String id, String name, double price, int stockQuantity,
-            String category, int status, int Discount, int totalSales, int totalStarRatings,
+            String category, int productType, int discount, int totalSales, int totalStarRatings,
             int numberOfRatings, double averageRating, Supplier supplier) {
         this.id = id;
         this.name = name;
         setPrice(price);
         setStockQuantity(stockQuantity);
         this.category = category;
-        setStatus(status);
-        this.discount = Discount;
+        setProductType(productType);
+        this.discount = discount;
         this.totalSales = totalSales;
         this.totalStarRatings = totalStarRatings;
         this.numberOfRatings = numberOfRatings;
@@ -108,38 +111,33 @@ public abstract class Product {
     }
 
     /**
-     * Get the status of the product as an integer for easier handling in UI and logic
+     * Get the type of the product as an integer for easier handling in UI and logic
      */
-    public int getStatus() {
-        switch (status) {
-            case RUMOUR:
+    public int getProductType() {
+        switch (productType) {
+            case BOOK:
                 return 0;
-            case AVAILABLE:
+            case STATIONERY:
                 return 1;
-            case OUT_OF_STOCK:
-                return 2;
             default:
-                return 3; // DISCONTINUED
+                return 2; // Combo
         }
     }
 
     /**
-     * Set the status of the product using an integer value
-     * 0 = RUMOUR, 1 = AVAILABLE, 2 = OUT_OF_STOCK, 3 = DISCONTINUED
+     * Set the type of the product using an integer value
+     * 0 = BOOK, 1 = STATIONERY, 2 = COMBO
      */
-    public void setStatus(int status) {
-        switch (status) {
+    public void setProductType(int productType) {
+        switch (productType) {
             case 0:
-                this.status = BookStatus.RUMOUR;
+                this.productType = ProductType.BOOK;
                 break;
             case 1:
-                this.status = BookStatus.AVAILABLE;
-                break;
-            case 2:
-                this.status = BookStatus.OUT_OF_STOCK;
+                this.productType = ProductType.STATIONERY;
                 break;
             default:
-                this.status = BookStatus.DISCONTINUED;
+                this.productType = ProductType.COMBO;
                 break;
         }
     }
