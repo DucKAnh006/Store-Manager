@@ -28,15 +28,17 @@ public class Book extends Product {
     /**
      * Default constructor for Book. Initializes with default values.
      */
-    public Book() {
+    public Book(int status) {
         super(0);
+        setStatus(status);
     }
 
     /**
      * Constructor for creating a Book with essential attributes.
      */
-    public Book(String id, String title, Author author, double price, int stockQuantity) {
+    public Book(String id, String title, Author author, double price, int stockQuantity, int status) {
         super(id, title, price, stockQuantity, 0);
+        setStatus(status);
         this.author = author;
     }
 
