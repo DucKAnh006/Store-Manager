@@ -14,9 +14,9 @@ import bookstoremgmt.util.DatabaseConnection;
  */
 public class BookRepository {
     private DatabaseConnection dataConnection = new DatabaseConnection(); // Initialize the DatabaseConnection object
-    private String sqlInsert = "INSERT INTO BM_Book (product_id, author_id, publisher, year_published, language, description) VALUES (?, ?, ?, ?, ?, ?)"; // Prepare the SQL statement for inserting a book into the BM_Book table
+    private String sqlInsert = "INSERT INTO BM_Book (product_id, author_id, publisher, year_published, language, description, status) VALUES (?, ?, ?, ?, ?, ?, ?)"; // Prepare the SQL statement for inserting a book into the BM_Book table
     private String sqlDelete = "DELETE FROM BM_Book WHERE product_id = ?"; // Prepare the SQL statement for deleting a book from the BM_Book table by its ID
-    private String sqlUpdate = "UPDATE BM_Book SET author_id = ?, publisher = ?, year_published = ?, language = ?, description = ? WHERE product_id = ?"; // Prepare the SQL statement for updating a book's specific details in the BM_Book table
+    private String sqlUpdate = "UPDATE BM_Book SET author_id = ?, publisher = ?, year_published = ?, language = ?, description = ?, status = ? WHERE product_id = ?"; // Prepare the SQL statement for updating a book's specific details in the BM_Book table
 
     public BookRepository() {
     }
@@ -148,7 +148,7 @@ public class BookRepository {
      */
     private void insertBookToProductTable(Book book, Connection connection) throws SQLException {
         // Prepare the SQL statement for inserting a book into the BM_Product table
-        String sql = "INSERT INTO BM_Product (product_id, name, price, stock_quantity, category, status, total_sales, total_star_ratings, number_of_ratings, average_rating, discount, supplier_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO BM_Product (product_id, name, price, stock_quantity, category, product_type, total_sales, total_star_ratings, number_of_ratings, average_rating, discount, supplier_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         // Using try-with-resources to automatically close the PreparedStatement and prevent memory leaks, even if an exception occurs.
         try (PreparedStatement query = connection.prepareStatement(sql)) {
             // Set the parameters for the SQL query using the book's details
@@ -157,7 +157,7 @@ public class BookRepository {
             query.setDouble(3, book.getPrice());
             query.setInt(4, book.getStockQuantity());
             query.setString(5, book.getCategory());
-            query.setInt(6, book.getStatus());
+            query.setInt(6, book.getProductType());
             query.setInt(7, book.getTotalSales());
             query.setInt(8, book.getTotalStarRatings());
             query.setInt(9, book.getNumberOfRatings());
@@ -183,7 +183,7 @@ public class BookRepository {
      */
     private void insertBookToProductTable(List<Book> books, Connection connection) throws SQLException {
         // Prepare the SQL statement for inserting multiple books into the BM_Product table
-        String sql = "INSERT INTO BM_Product (product_id, name, price, stock_quantity, category, status, total_sales, total_star_ratings, number_of_ratings, average_rating, discount, supplier_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO BM_Product (product_id, name, price, stock_quantity, category, product_type, total_sales, total_star_ratings, number_of_ratings, average_rating, discount, supplier_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         // Using try-with-resources to automatically close the PreparedStatement and prevent memory leaks, even if an exception occurs.
         try (PreparedStatement query = connection.prepareStatement(sql)) {
             // Loop through the list of books and set the parameters for each book's details in the SQL query
@@ -193,7 +193,7 @@ public class BookRepository {
                 query.setDouble(3, book.getPrice());
                 query.setInt(4, book.getStockQuantity());
                 query.setString(5, book.getCategory());
-                query.setInt(6, book.getStatus());
+                query.setInt(6, book.getProductType());
                 query.setInt(7, book.getTotalSales());
                 query.setInt(8, book.getTotalStarRatings());
                 query.setInt(9, book.getNumberOfRatings());
@@ -229,9 +229,10 @@ public class BookRepository {
             query.setString(1, book.getId());
             query.setString(2, book.getAuthor().getId());
             query.setString(3, book.getPublisher());
-            query.setInt(4, book.getYearPublished());
-            query.setString(5, book.getLanguage());
-            query.setString(6, book.getDescription());
+            query.setInt(4, book.getStatus());
+            query.setInt(5, book.getYearPublished());
+            query.setString(6, book.getLanguage());
+            query.setString(7, book.getDescription());
 
             int rowsAffected = query.executeUpdate(); // Execute the SQL query and get the number of rows affected
             // Execute the SQL query and check if the insertion was successful. If the insertion fails, throw an exception for better debugging
@@ -257,9 +258,10 @@ public class BookRepository {
                 query.setString(1, book.getId());
                 query.setString(2, book.getAuthor().getId());
                 query.setString(3, book.getPublisher());
-                query.setInt(4, book.getYearPublished());
-                query.setString(5, book.getLanguage());
-                query.setString(6, book.getDescription());
+                query.setInt(4, book.getProductType());
+                query.setInt(5, book.getYearPublished());
+                query.setString(6, book.getLanguage());
+                query.setString(7, book.getDescription());
 
                 query.addBatch(); // Add the SQL statement to the batch for execution
             }
@@ -378,7 +380,7 @@ public class BookRepository {
      */
     private void updateBookInProductTable(Book book, Connection connection) throws SQLException {
         // Prepare the SQL statement for updating a book's details in the BM_Product table
-        String sql = "UPDATE BM_Product SET name = ?, price = ?, stock_quantity = ?, category = ?, status = ?, total_sales = ?, total_star_ratings = ?, number_of_ratings = ?, average_rating = ?, discount = ?, supplier_id = ? WHERE product_id = ?";
+        String sql = "UPDATE BM_Product SET name = ?, price = ?, stock_quantity = ?, category = ?, product_type = ?, status = ?, total_sales = ?, total_star_ratings = ?, number_of_ratings = ?, average_rating = ?, discount = ?, supplier_id = ? WHERE product_id = ?";
         // Using try-with-resources to automatically close the PreparedStatement and prevent memory leaks, even if an exception occurs.
         try (PreparedStatement query = connection.prepareStatement(sql)) {
             // Set the parameters for the SQL query using the book's updated details
@@ -386,14 +388,15 @@ public class BookRepository {
             query.setDouble(2, book.getPrice());
             query.setInt(3, book.getStockQuantity());
             query.setString(4, book.getCategory());
-            query.setInt(5, book.getStatus());
-            query.setInt(6, book.getTotalSales());
-            query.setInt(7, book.getTotalStarRatings());
-            query.setInt(8, book.getNumberOfRatings());
-            query.setDouble(9, book.getAverageRating());
-            query.setDouble(10, book.getDiscount());
-            query.setString(11, book.getSupplier().getId());
-            query.setString(12, book.getId());
+            query.setInt(5, book.getProductType());
+            query.setInt(6, book.getStatus());
+            query.setInt(7, book.getTotalSales());
+            query.setInt(8, book.getTotalStarRatings());
+            query.setInt(9, book.getNumberOfRatings());
+            query.setDouble(10, book.getAverageRating());
+            query.setDouble(11, book.getDiscount());
+            query.setString(12, book.getSupplier().getId());
+            query.setString(13, book.getId());
 
             int rowsAffected = query.executeUpdate(); // Execute the SQL query and get the number of rows affected
             // Execute the SQL query and check if the update was successful. If the update fails, throw an exception for better debugging

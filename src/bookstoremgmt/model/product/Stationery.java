@@ -13,20 +13,27 @@ public class Stationery extends Product {
     private String material; // Material of the stationery item (e.g., plastic, metal, wood)
 
     /**
+     * Default constructor for Stationery. Initializes with default values.
+     */
+    public Stationery() {
+        super(1);
+    }
+
+    /**
      * Constructor for creating a Stationery item with essential attributes.
      */
     public Stationery(String id, String name, double price, int stockQuantity) {
-        super(id, name, price, stockQuantity);
+        super(id, name, price, stockQuantity, 1);
     }
 
     /**
      * Full constructor for creating a Stationery item with all attributes.
      */
     public Stationery(String id, String name, double price, int stockQuantity,
-            String category, int status, int Discount, int totalSales, int totalStarRatings,
+            String category, int discount, int totalSales, int totalStarRatings,
             int numberOfRatings, double averageRating, String manufacturer, String material, Supplier supplier) {
-        super(id, name, price, stockQuantity, category, status, Discount, totalSales,
-                totalStarRatings, numberOfRatings, averageRating, supplier);
+        super(id, name, price, stockQuantity, category, 1, discount, totalSales, totalStarRatings,
+                numberOfRatings, averageRating, supplier);
         this.manufacturer = manufacturer;
         this.material = material;
     }

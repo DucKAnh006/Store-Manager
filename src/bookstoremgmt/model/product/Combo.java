@@ -3,6 +3,8 @@ package bookstoremgmt.model.product;
 import java.util.Map;
 import java.util.HashMap;
 
+import bookstoremgmt.model.catalog.Supplier;
+
 /**
  * Represents a bundled collection of books sold together.
  * Extends the abstract Product class.
@@ -17,8 +19,11 @@ public class Combo extends Product {
     /**
      * Constructor for creating a Combo with essential attributes.
      */
-    public Combo(String id, String name, double price, int stockQuantity, Map<Product, Integer> includedProducts) {
-        super(id, name, price, stockQuantity);
+    public Combo(String id, String name, double price, int stockQuantity,
+            String category, int discount, int totalSales, int totalStarRatings,
+            int numberOfRatings, double averageRating, Supplier supplier, Map<Product, Integer> includedProducts) {
+         super(id, name, price, stockQuantity, category, 2, discount, totalSales, totalStarRatings,
+                numberOfRatings, averageRating, supplier);
         this.includedProducts = includedProducts;
     }
 
