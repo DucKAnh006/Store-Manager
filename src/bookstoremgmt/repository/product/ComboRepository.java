@@ -98,7 +98,7 @@ public class ComboRepository {
      */
     private void insertComboToProductTable(Combo combo, Connection connection) throws SQLException {
         // Prepare the SQL statement for inserting a combo into the BM_Product table
-        String sql = "INSERT INTO BM_Product (product_id, name, price, stock_quantity, category, status, total_sales, total_star_ratings, number_of_ratings, average_rating, discount, supplier_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO BM_Product (product_id, name, price, stock_quantity, category, product_type, total_sales, total_star_ratings, number_of_ratings, average_rating, discount, supplier_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         // Using try-with-resources to automatically close the PreparedStatement and prevent memory leaks, even if an exception occurs.
         try (PreparedStatement query = connection.prepareStatement(sql)) {
             // Set the parameters for the SQL query using the combo's details
@@ -107,7 +107,7 @@ public class ComboRepository {
             query.setDouble(3, combo.getPrice());
             query.setInt(4, combo.getStockQuantity());
             query.setString(5, combo.getCategory());
-            query.setInt(6, combo.getStatus());
+            query.setInt(6, combo.getProductType());
             query.setInt(7, combo.getTotalSales());
             query.setInt(8, combo.getTotalStarRatings());
             query.setInt(9, combo.getNumberOfRatings());
@@ -190,7 +190,7 @@ public class ComboRepository {
      */
     private void updateComboInProductTable(Combo combo, Connection connection) throws SQLException {
         // Prepare the SQL statement for updating a combo's details in the BM_Product table
-        String sql = "UPDATE BM_Product SET name = ?, price = ?, stock_quantity = ?, category = ?, status = ?, total_sales = ?, total_star_ratings = ?, number_of_ratings = ?, average_rating = ?, discount = ?, supplier_id = ? WHERE product_id = ?";
+        String sql = "UPDATE BM_Product SET name = ?, price = ?, stock_quantity = ?, category = ?, total_sales = ?, total_star_ratings = ?, number_of_ratings = ?, average_rating = ?, discount = ?, supplier_id = ? WHERE product_id = ?";
         // Using try-with-resources to automatically close the PreparedStatement and prevent memory leaks, even if an exception occurs.
         try (PreparedStatement query = connection.prepareStatement(sql)) {
             // Set the parameters for the SQL query using the combo's updated details
@@ -198,14 +198,13 @@ public class ComboRepository {
             query.setDouble(2, combo.getPrice());
             query.setInt(3, combo.getStockQuantity());
             query.setString(4, combo.getCategory());
-            query.setInt(5, combo.getStatus());
-            query.setInt(6, combo.getTotalSales());
-            query.setInt(7, combo.getTotalStarRatings());
-            query.setInt(8, combo.getNumberOfRatings());
-            query.setDouble(9, combo.getAverageRating());
-            query.setDouble(10, combo.getDiscount());
-            query.setString(11, combo.getSupplier().getId());
-            query.setString(12, combo.getId());
+            query.setInt(5, combo.getTotalSales());
+            query.setInt(6, combo.getTotalStarRatings());
+            query.setInt(7, combo.getNumberOfRatings());
+            query.setDouble(8, combo.getAverageRating());
+            query.setDouble(9, combo.getDiscount());
+            query.setString(10, combo.getSupplier().getId());
+            query.setString(11, combo.getId());
 
             int rowsAffected = query.executeUpdate(); // Execute the SQL query and get the number of rows affected
             // Execute the SQL query and check if the update was successful. If the update fails, throw an exception for better debugging

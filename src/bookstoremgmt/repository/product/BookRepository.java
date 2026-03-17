@@ -3,26 +3,27 @@ package bookstoremgmt.repository.product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import bookstoremgmt.model.product.Book;
 import bookstoremgmt.util.DatabaseConnection;
 
 /**
- * BookRepository class handles all database operations related to Book entities, including adding, deleting, and updating books in the database. It ensures that operations on both the BM_Product and BM_Book tables are performed atomically to maintain data integrity.
+ * BookRepository class handles all database operations related to Book entities, including adding, deleting, and updating books in the database. It ensures that operations on both the BM_Product and BM_Books tables are performed atomically to maintain data integrity.
  * @author Nguyen Tran Duc Anh
  */
 public class BookRepository {
     private DatabaseConnection dataConnection = new DatabaseConnection(); // Initialize the DatabaseConnection object
-    private String sqlInsert = "INSERT INTO BM_Book (product_id, author_id, publisher, year_published, language, description, status) VALUES (?, ?, ?, ?, ?, ?, ?)"; // Prepare the SQL statement for inserting a book into the BM_Book table
-    private String sqlDelete = "DELETE FROM BM_Book WHERE product_id = ?"; // Prepare the SQL statement for deleting a book from the BM_Book table by its ID
-    private String sqlUpdate = "UPDATE BM_Book SET author_id = ?, publisher = ?, year_published = ?, language = ?, description = ?, status = ? WHERE product_id = ?"; // Prepare the SQL statement for updating a book's specific details in the BM_Book table
+    private String sqlInsert = "INSERT INTO BM_Books (product_id, author_id, publisher, status, year_published, language, description) VALUES (?, ?, ?, ?, ?, ?, ?)"; // Prepare the SQL statement for inserting a book into the BM_Books table
+    private String sqlDelete = "DELETE FROM BM_Books WHERE product_id = ?"; // Prepare the SQL statement for deleting a book from the BM_Books table by its ID
+    private String sqlUpdate = "UPDATE BM_Books SET author_id = ?, publisher = ?, year_published = ?, language = ?, description = ?, status = ? WHERE product_id = ?"; // Prepare the SQL statement for updating a book's specific details in the BM_Books table
 
     public BookRepository() {
     }
 
     /**
-     * Adds a book to the database. This method ensures that the book is added from both the BM_Book and BM_Product tables. If either addition fails, an exception is thrown to indicate the failure.
+     * Adds a book to the database. This method ensures that the book is added from both the BM_Books and BM_Product tables. If either addition fails, an exception is thrown to indicate the failure.
      * @param book
      * @throws SQLException
      */
@@ -33,7 +34,7 @@ public class BookRepository {
 
             try {
                 insertBookToProductTable(book, connection); // Insert into BM_Product table
-                insertBookToBookTable(book, connection); // Insert into BM_Book table
+                insertBookToBookTable(book, connection); // Insert into BM_Books table
             } catch (SQLException e) {
                 connection.rollback(); // Rollback transaction if any SQLException occurs during insertion
                 throw e; // Rethrow the exception to be handled by the caller
@@ -57,7 +58,7 @@ public class BookRepository {
 
             try {
                 insertBookToProductTable(books, connection); // Insert multiple books into BM_Product table
-                insertBookToBookTable(books, connection); // Insert multiple books into BM_Book table
+                insertBookToBookTable(books, connection); // Insert multiple books into BM_Books table
             } catch (SQLException e) {
                 connection.rollback(); // Rollback transaction if any SQLException occurs during insertion
                 throw e; // Rethrow the exception to be handled by the caller
@@ -70,7 +71,7 @@ public class BookRepository {
     }
 
     /**
-     * Deletes a book from the database by its ID. This method ensures that the book is deleted from both the BM_Product and BM_Book tables. If either deletion fails, an exception is thrown to indicate the failure.
+     * Deletes a book from the database by its ID. This method ensures that the book is deleted from both the BM_Product and BM_Books tables. If either deletion fails, an exception is thrown to indicate the failure.
      * @param bookId
      * @throws SQLException
      */
@@ -79,7 +80,7 @@ public class BookRepository {
             connection.setAutoCommit(false); // Start transaction
 
             try {
-                deleteBookFromBookTable(bookId, connection); // Delete from BM_Book table
+                deleteBookFromBookTable(bookId, connection); // Delete from BM_Books table
                 deleteBookFromProductTable(bookId, connection); // Delete from BM_Product table
             } catch (SQLException e) {
                 connection.rollback(); // Rollback transaction if any SQLException occurs during deletion
@@ -93,7 +94,7 @@ public class BookRepository {
     }
  
     /**
-     * Deletes multiple books from the database by their IDs. This method ensures that all specified books are deleted from both the BM_Product and BM_Book tables. If any deletion fails, an exception is thrown to indicate the failure.
+     * Deletes multiple books from the database by their IDs. This method ensures that all specified books are deleted from both the BM_Product and BM_Books tables. If any deletion fails, an exception is thrown to indicate the failure.
      * @param bookIds
      * @throws SQLException
      */
@@ -103,7 +104,7 @@ public class BookRepository {
             connection.setAutoCommit(false); // Start transaction
 
             try {
-                deleteBookFromBookTable(bookIds, connection); // Delete multiple books from BM_Book table
+                deleteBookFromBookTable(bookIds, connection); // Delete multiple books from BM_Books table
                 deleteBookFromProductTable(bookIds, connection); // Delete multiple books from BM_Product table
             } catch (SQLException e) {
                 connection.rollback(); // Rollback transaction if any SQLException occurs during deletion
@@ -117,7 +118,7 @@ public class BookRepository {
     }
 
     /**
-     * Updates the details of an existing book in the database. This method ensures that the book's information is updated in both the BM_Product and BM_Book tables. If either update fails, an exception is thrown to indicate the failure.
+     * Updates the details of an existing book in the database. This method ensures that the book's information is updated in both the BM_Product and BM_Books tables. If either update fails, an exception is thrown to indicate the failure.
      * @param book
      * @throws SQLException
      */
@@ -128,7 +129,7 @@ public class BookRepository {
             
             try {
                 updateBookInProductTable(book, connection); // Update book details in BM_Product table
-                updateBookInBookTable(book, connection); // Update book details in BM_Book table
+                updateBookInBookTable(book, connection); // Update book details in BM_Books table
             } catch (SQLException e) {
                 connection.rollback(); // Rollback transaction if any SQLException occurs during update
                 throw e; // Rethrow the exception to be handled by the caller
@@ -217,7 +218,7 @@ public class BookRepository {
     }
 
     /**
-     * Inserts a book into the BM_Book table. This method prepares an SQL statement to insert the book's specific details into the BM_Book table. If the insertion fails, an exception is thrown to indicate the failure, along with the ID of the book that caused the failure for better debugging.
+     * Inserts a book into the BM_Books table. This method prepares an SQL statement to insert the book's specific details into the BM_Books table. If the insertion fails, an exception is thrown to indicate the failure, along with the ID of the book that caused the failure for better debugging.
      * @param book
      * @return
      * @throws SQLException
@@ -245,7 +246,7 @@ public class BookRepository {
     }
 
     /**
-     * Inserts multiple books into the BM_Book table. This method prepares an SQL statement to insert the specific details of each book in the provided list into the BM_Book table. If any insertion fails, an exception is thrown to indicate the failure, along with the ID of the book that caused the failure for better debugging.
+     * Inserts multiple books into the BM_Books table. This method prepares an SQL statement to insert the specific details of each book in the provided list into the BM_Books table. If any insertion fails, an exception is thrown to indicate the failure, along with the ID of the book that caused the failure for better debugging.
      * @param books
      * @return
      * @throws SQLException
@@ -258,7 +259,7 @@ public class BookRepository {
                 query.setString(1, book.getId());
                 query.setString(2, book.getAuthor().getId());
                 query.setString(3, book.getPublisher());
-                query.setInt(4, book.getProductType());
+                query.setInt(4, book.getStatus());
                 query.setInt(5, book.getYearPublished());
                 query.setString(6, book.getLanguage());
                 query.setString(7, book.getDescription());
@@ -327,7 +328,7 @@ public class BookRepository {
     }
 
     /**
-     * Deletes a book from the BM_Book table by its ID. This method prepares an SQL statement to delete the book's entry from the BM_Book table based on the provided book ID. If the deletion fails, an exception is thrown to indicate the failure, along with the ID of the book that caused the failure for better debugging.
+     * Deletes a book from the BM_Books table by its ID. This method prepares an SQL statement to delete the book's entry from the BM_Books table based on the provided book ID. If the deletion fails, an exception is thrown to indicate the failure, along with the ID of the book that caused the failure for better debugging.
      * @param bookId
      * @return
      * @throws SQLException
@@ -345,7 +346,7 @@ public class BookRepository {
     }
 
     /**
-     * Deletes multiple books from the BM_Book table by their IDs. This method prepares an SQL statement to delete the entries of multiple books from the BM_Book table based on the provided list of book IDs. If any deletion fails, an exception is thrown to indicate the failure, along with the ID of the book that caused the failure for better debugging.
+     * Deletes multiple books from the BM_Books table by their IDs. This method prepares an SQL statement to delete the entries of multiple books from the BM_Books table based on the provided list of book IDs. If any deletion fails, an exception is thrown to indicate the failure, along with the ID of the book that caused the failure for better debugging.
      * @param bookIds
      * @return
      * @throws SQLException
@@ -364,7 +365,7 @@ public class BookRepository {
             // Loop through the results of the batch execution and check if any deletion failed. If any deletion fails, throw an exception for better debugging
             for (int result : rowsAffected) {
                 if (result == 0) {
-                    throw new SQLException("Failed to delete product from BM_Book table."); // Throw a generic exception for multiple books, as it may be difficult to identify which specific book caused the failure
+                    throw new SQLException("Failed to delete product from BM_Books table."); // Throw a generic exception for multiple books, as it may be difficult to identify which specific book caused the failure
                 }
             }
         } catch (SQLException e) {
@@ -380,7 +381,7 @@ public class BookRepository {
      */
     private void updateBookInProductTable(Book book, Connection connection) throws SQLException {
         // Prepare the SQL statement for updating a book's details in the BM_Product table
-        String sql = "UPDATE BM_Product SET name = ?, price = ?, stock_quantity = ?, category = ?, product_type = ?, status = ?, total_sales = ?, total_star_ratings = ?, number_of_ratings = ?, average_rating = ?, discount = ?, supplier_id = ? WHERE product_id = ?";
+        String sql = "UPDATE BM_Product SET name = ?, price = ?, stock_quantity = ?, category = ?, total_sales = ?, total_star_ratings = ?, number_of_ratings = ?, average_rating = ?, discount = ?, supplier_id = ? WHERE product_id = ?";
         // Using try-with-resources to automatically close the PreparedStatement and prevent memory leaks, even if an exception occurs.
         try (PreparedStatement query = connection.prepareStatement(sql)) {
             // Set the parameters for the SQL query using the book's updated details
@@ -388,15 +389,13 @@ public class BookRepository {
             query.setDouble(2, book.getPrice());
             query.setInt(3, book.getStockQuantity());
             query.setString(4, book.getCategory());
-            query.setInt(5, book.getProductType());
-            query.setInt(6, book.getStatus());
-            query.setInt(7, book.getTotalSales());
-            query.setInt(8, book.getTotalStarRatings());
-            query.setInt(9, book.getNumberOfRatings());
-            query.setDouble(10, book.getAverageRating());
-            query.setDouble(11, book.getDiscount());
-            query.setString(12, book.getSupplier().getId());
-            query.setString(13, book.getId());
+            query.setInt(5, book.getTotalSales());
+            query.setInt(6, book.getTotalStarRatings());
+            query.setInt(7, book.getNumberOfRatings());
+            query.setDouble(8, book.getAverageRating());
+            query.setDouble(9, book.getDiscount());
+            query.setString(10, book.getSupplier().getId());
+            query.setString(11, book.getId());
 
             int rowsAffected = query.executeUpdate(); // Execute the SQL query and get the number of rows affected
             // Execute the SQL query and check if the update was successful. If the update fails, throw an exception for better debugging
@@ -409,7 +408,7 @@ public class BookRepository {
     }
 
     /**
-     * Updates the specific details of an existing book in the BM_Book table. This method prepares an SQL statement to update the book's specific information in the BM_Book table based on the provided Book object. If the update fails, an exception is thrown to indicate the failure, along with the ID of the book that caused the failure for better debugging.
+     * Updates the specific details of an existing book in the BM_Books table. This method prepares an SQL statement to update the book's specific information in the BM_Books table based on the provided Book object. If the update fails, an exception is thrown to indicate the failure, along with the ID of the book that caused the failure for better debugging.
      * @param book
      * @return
      * @throws SQLException
@@ -423,7 +422,8 @@ public class BookRepository {
             query.setInt(3, book.getYearPublished());
             query.setString(4, book.getLanguage());
             query.setString(5, book.getDescription());
-            query.setString(6, book.getId());
+            query.setInt(6, book.getStatus());
+            query.setString(7, book.getId());
 
             int rowsAffected = query.executeUpdate(); // Execute the SQL query and get the number of rows affected
             // Execute the SQL query and check if the update was successful. If the update fails, throw an exception for better debugging

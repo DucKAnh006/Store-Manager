@@ -105,7 +105,7 @@ public class ComboDetailRepository {
                 int rowsAffected = query.executeUpdate(); // Execute the SQL query and get the number of rows affected
                 // Execute the SQL query and check if the insertion was successful. If the insertion fails, throw an exception for better debugging
                 if (rowsAffected == 0) {
-                    throw new SQLException("Failed to insert product's details into combo."); // Throw an exception for better debugging
+                    throw new SQLException("Failed to update product's details into combo."); // Throw an exception for better debugging
                 }
             } catch (SQLException e) {
                 connection.rollback(); // Rollback transaction if any SQLException occurs during update

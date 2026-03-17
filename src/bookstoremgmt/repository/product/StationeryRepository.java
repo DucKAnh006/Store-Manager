@@ -50,7 +50,7 @@ public class StationeryRepository {
      * @param stationery
      * @throws SQLException
      */
-    public void addStationerys(List<Stationery> stationery) throws SQLException {
+    public void addStationeries(List<Stationery> stationery) throws SQLException {
         // Use try-with-resources to ensure that the database connection is properly closed after the operation is completed, even if an exception occurs
         try (Connection connection = dataConnection.getConnection()) {
             connection.setAutoCommit(false); // Start transaction
@@ -97,7 +97,7 @@ public class StationeryRepository {
      * @param stationeryIds
      * @throws SQLException
      */
-    public void deletestationery(List<String> stationeryIds) throws SQLException { 
+    public void deleteStationeries(List<String> stationeryIds) throws SQLException { 
         // Use try-with-resources to ensure that the database connection is properly closed after the operation is completed, even if an exception occurs
         try (Connection connection = dataConnection.getConnection()) {
             connection.setAutoCommit(false); // Start transaction
@@ -148,7 +148,7 @@ public class StationeryRepository {
      */
     private void insertStationeryToProductTable(Stationery stationery, Connection connection) throws SQLException {
         // Prepare the SQL statement for inserting a stationery into the BM_Product table
-        String sql = "INSERT INTO BM_Product (product_id, name, price, stock_quantity, category, status, total_sales, total_star_ratings, number_of_ratings, average_rating, discount, supplier_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO BM_Product (product_id, name, price, stock_quantity, category, product_type, total_sales, total_star_ratings, number_of_ratings, average_rating, discount, supplier_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         // Using try-with-resources to automatically close the PreparedStatement and prevent memory leaks, even if an exception occurs.
         try (PreparedStatement query = connection.prepareStatement(sql)) {
             // Set the parameters for the SQL query using the stationery's details
@@ -157,7 +157,7 @@ public class StationeryRepository {
             query.setDouble(3, stationery.getPrice());
             query.setInt(4, stationery.getStockQuantity());
             query.setString(5, stationery.getCategory());
-            query.setInt(6, stationery.getStatus());
+            query.setInt(6, stationery.getProductType());
             query.setInt(7, stationery.getTotalSales());
             query.setInt(8, stationery.getTotalStarRatings());
             query.setInt(9, stationery.getNumberOfRatings());
@@ -168,7 +168,7 @@ public class StationeryRepository {
             int rowsAffected = query.executeUpdate(); // Execute the SQL query and get the number of rows affected
             // Execute the SQL query and check if the insertion was successful. If the insertion fails, throw an exception for better debugging
             if (rowsAffected == 0) {
-                throw new SQLException("Failed to insert product details into database."); // Throw an exception for better debugging
+                throw new SQLException("Failed to insert stationery details into database."); // Throw an exception for better debugging
             }
         } catch (SQLException e) {
             throw new SQLException("Failed to insert stationery with ID: " + stationery.getId(), e); // Throw an exception with the stationery ID for better debugging
@@ -183,7 +183,7 @@ public class StationeryRepository {
      */
     private void insertStationeryToProductTable(List<Stationery> stationery, Connection connection) throws SQLException {
         // Prepare the SQL statement for inserting multiple stationery into the BM_Product table
-        String sql = "INSERT INTO BM_Product (product_id, name, price, stock_quantity, category, status, total_sales, total_star_ratings, number_of_ratings, average_rating, discount, supplier_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO BM_Product (product_id, name, price, stock_quantity, category, product_type, total_sales, total_star_ratings, number_of_ratings, average_rating, discount, supplier_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         // Using try-with-resources to automatically close the PreparedStatement and prevent memory leaks, even if an exception occurs.
         try (PreparedStatement query = connection.prepareStatement(sql)) {
             // Loop through the list of stationery and set the parameters for each stationery's details in the SQL query
@@ -193,7 +193,7 @@ public class StationeryRepository {
                 query.setDouble(3, str.getPrice());
                 query.setInt(4, str.getStockQuantity());
                 query.setString(5, str.getCategory());
-                query.setInt(6, str.getStatus());
+                query.setInt(6, str.getProductType());
                 query.setInt(7, str.getTotalSales());
                 query.setInt(8, str.getTotalStarRatings());
                 query.setInt(9, str.getNumberOfRatings());
@@ -371,7 +371,7 @@ public class StationeryRepository {
      */
     private void updateStationeryInProductTable(Stationery stationery, Connection connection) throws SQLException {
         // Prepare the SQL statement for updating a stationery's details in the BM_Product table
-        String sql = "UPDATE BM_Product SET name = ?, price = ?, stock_quantity = ?, category = ?, status = ?, total_sales = ?, total_star_ratings = ?, number_of_ratings = ?, average_rating = ?, discount = ?, supplier_id = ? WHERE product_id = ?";
+        String sql = "UPDATE BM_Product SET name = ?, price = ?, stock_quantity = ?, category = ?, total_sales = ?, total_star_ratings = ?, number_of_ratings = ?, average_rating = ?, discount = ?, supplier_id = ? WHERE product_id = ?";
         // Using try-with-resources to automatically close the PreparedStatement and prevent memory leaks, even if an exception occurs.
         try (PreparedStatement query = connection.prepareStatement(sql)) {
             // Set the parameters for the SQL query using the stationery's updated details
@@ -379,14 +379,13 @@ public class StationeryRepository {
             query.setDouble(2, stationery.getPrice());
             query.setInt(3, stationery.getStockQuantity());
             query.setString(4, stationery.getCategory());
-            query.setInt(5, stationery.getStatus());
-            query.setInt(6, stationery.getTotalSales());
-            query.setInt(7, stationery.getTotalStarRatings());
-            query.setInt(8, stationery.getNumberOfRatings());
-            query.setDouble(9, stationery.getAverageRating());
-            query.setDouble(10, stationery.getDiscount());
-            query.setString(11, stationery.getSupplier().getId());
-            query.setString(12, stationery.getId());
+            query.setInt(5, stationery.getTotalSales());
+            query.setInt(6, stationery.getTotalStarRatings());
+            query.setInt(7, stationery.getNumberOfRatings());
+            query.setDouble(8, stationery.getAverageRating());
+            query.setDouble(9, stationery.getDiscount());
+            query.setString(10, stationery.getSupplier().getId());
+            query.setString(11, stationery.getId());
 
             int rowsAffected = query.executeUpdate(); // Execute the SQL query and get the number of rows affected
             // Execute the SQL query and check if the update was successful. If the update fails, throw an exception for better debugging
