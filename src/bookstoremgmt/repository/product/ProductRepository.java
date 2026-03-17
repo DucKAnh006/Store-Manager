@@ -107,7 +107,8 @@ public class ProductRepository {
                                                             rs.getInt("number_of_ratings"), rs.getDouble("average_rating"), rs.getString("manufacturer"), rs.getString("material"), detailSupplier);
                                         break;
                                     }
-                                } catch (Exception e) {
+                                } catch (SQLException e) {
+                                    throw new SQLException("Cannot add Details to combo", e);
                                 }
                             break;
                         }
