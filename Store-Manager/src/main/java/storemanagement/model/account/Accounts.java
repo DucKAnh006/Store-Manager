@@ -1,60 +1,33 @@
 package storemanagement.model.account;
 
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
 /**
  * 
  * @author Nguyen Tran Duc Anh
  */
+@Entity
+@Table(name = "BM_Account")
+@Inheritance(strategy = InheritanceType.JOINED)
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class Accounts {
+
+    @Id
+    @Column (name = "account_id")
+    private String id; // Unique identifier for the account
+
+    @Column (name = "name")
     private String name; // Name of the account holder
+
+    @Column (name = "account", unique = true)
     private String account; // Unique user ID for login
+
+    @Column (name = "password")
     private String password; // Password for authentication
 
-    /**
-     * Default constructor for Accounts. Initializes an empty account.
-     */
-    public Accounts() {
-    }
-
-    /**
-     * Constructor for Accounts with account and password. Name can be set later.
-     */
-    public Accounts(String account, String password) {
-        this.account = account;
-        this.password = password;
-    }
-
-    /**
-     * Constructor for Accounts with all fields. Useful for creating a complete
-     * account in one step.
-     */
-    public Accounts(String name, String account, String password) {
-        this.name = name;
-        this.account = account;
-        this.password = password;
-    }
-
-    // Getters and Setters
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getaccount() {
-        return account;
-    }
-
-    public void setaccount(String account) {
-        this.account = account;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }
