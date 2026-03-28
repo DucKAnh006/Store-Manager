@@ -1,5 +1,10 @@
 package storemanagement.model.product;
 
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
 import storemanagement.model.catalog.Supplier;
 
 /**
@@ -8,20 +13,13 @@ import storemanagement.model.catalog.Supplier;
  *
  * @author Nguyen Tran Duc Anh
  */
+@Entity
+@Table(name = "BM_Product")
+@Inheritance(strategy = InheritanceType.JOINED)
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class Product {
-
-    private String id; // Unique identifier for the product
-    private String name; // Name of the product
-    private double price; // Price of the product
-    private int stockQuantity; // Quantity of the product available in stock
-    private String category; // Category of the product (e.g., Fiction, Non-Fiction, Combo, Stationery)
-    private ProductType productType; // Type of product 
-    private int totalSales; // Total number of sales for the product    
-    private int totalStarRatings; // Total star ratings accumulated for the product
-    private int numberOfRatings; // Number of ratings received for the product
-    private double averageRating; // Average rating calculated from totalStarRatings and numberOfRatings
-    private int discount; // Discount percentage for the product
-    private Supplier supplier; // ID of the supplier providing the product
 
     /**
      * Enum representing the type of a product.
@@ -30,164 +28,42 @@ public abstract class Product {
         BOOK, STATIONERY, COMBO
     }
 
-    /**
-     * Default constructor for framework compatibility.
-     */
-    public Product(int productType) {
-        setProductType(productType);
-    }
+    @Id
+    @Column(name = "product_id")
+    private String id; // Unique identifier for the product
 
-    /**
-     * Constructor to initialize essential product attributes.
-     */
-    public Product(String id, String name, double price, int stockQuantity, int productType) {
-        this.id = id;
-        this.name = name;
-        setPrice(price);
-        setStockQuantity(stockQuantity);
-        setProductType(productType);
-    }
+    @Column(name = "name")
+    private String name; // Name of the product
 
-    /**
-     * Full constructor to initialize all product attributes.
-     */
-    public Product(String id, String name, double price, int stockQuantity,
-            String category, int productType, int discount, int totalSales, int totalStarRatings,
-            int numberOfRatings, double averageRating, Supplier supplier) {
-        this.id = id;
-        this.name = name;
-        setPrice(price);
-        setStockQuantity(stockQuantity);
-        this.category = category;
-        setProductType(productType);
-        this.discount = discount;
-        this.totalSales = totalSales;
-        this.totalStarRatings = totalStarRatings;
-        this.numberOfRatings = numberOfRatings;
-        this.averageRating = averageRating;
-        this.supplier = supplier;
-    }
+    @Column(name = "price")
+    private double price; // Price of the product
 
-    // Getters and setters for all attributes
+    @Column(name = "stock_quantity")
+    private int stockQuantity; // Quantity of the product available in stock
 
-    public String getId() {
-        return id;
-    }
+    @Column(name = "category")
+    private String category; // Category of the product (e.g., Fiction, Non-Fiction, Combo, Stationery)
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(name = "product_type")
+    private ProductType productType; // Type of product
 
-    public String getName() {
-        return name;
-    }
+    @Column(name = "total_sales")
+    private int totalSales; // Total number of sales for the product
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    @Column(name = "total_star_ratings")
+    private int totalStarRatings; // Total star ratings accumulated for the product
 
-    public double getPrice() {
-        return price;
-    }
+    @Column(name = "number_of_ratings")
+    private int numberOfRatings; // Number of ratings received for the product
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
+    @Column(name = "average_rating")
+    private double averageRating; // Average rating calculated from totalStarRatings and numberOfRatings
 
-    public int getStockQuantity() {
-        return stockQuantity;
-    }
+    @Column(name = "discount")
+    private int discount; // Discount percentage for the product
 
-    public void setStockQuantity(int stockQuantity) {
-        this.stockQuantity = stockQuantity;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    /**
-     * Get the type of the product as an integer for easier handling in UI and logic
-     */
-    public int getProductType() {
-        switch (productType) {
-            case BOOK:
-                return 0;
-            case STATIONERY:
-                return 1;
-            default:
-                return 2; // Combo
-        }
-    }
-
-    /**
-     * Set the type of the product using an integer value
-     * 0 = BOOK, 1 = STATIONERY, 2 = COMBO
-     */
-    public void setProductType(int productType) {
-        switch (productType) {
-            case 0:
-                this.productType = ProductType.BOOK;
-                break;
-            case 1:
-                this.productType = ProductType.STATIONERY;
-                break;
-            default:
-                this.productType = ProductType.COMBO;
-                break;
-        }
-    }
-
-    public int getTotalSales() {
-        return totalSales;
-    }
-
-    public void setTotalSales(int totalSales) {
-        this.totalSales = totalSales;
-    }
-
-    public int getTotalStarRatings() {
-        return totalStarRatings;
-    }
-
-    public void setTotalStarRatings(int totalStarRatings) {
-        this.totalStarRatings = totalStarRatings;
-    }
-
-    public int getNumberOfRatings() {
-        return numberOfRatings;
-    }
-
-    public void setNumberOfRatings(int numberOfRatings) {
-        this.numberOfRatings = numberOfRatings;
-    }
-
-    public double getAverageRating() {
-        return averageRating;
-    }
-
-    public void setAverageRating(double averageRating) {
-        this.averageRating = averageRating;
-    }
-
-    public int getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(int discount) {
-        this.discount = discount;
-    }
-
-    public Supplier getSupplier() {
-        return supplier;
-    }
-
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
-    }
-
+    @ManyToOne
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier; // ID of the supplier providing the product
 }

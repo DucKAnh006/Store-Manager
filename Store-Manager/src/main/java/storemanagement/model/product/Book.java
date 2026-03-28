@@ -1,9 +1,11 @@
 package storemanagement.model.product;
 
-
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 import storemanagement.model.catalog.Author;
-import storemanagement.model.catalog.Supplier;
 
 /**
  * Book class represents a book product in the bookstore management system. It
@@ -12,13 +14,13 @@ import storemanagement.model.catalog.Supplier;
  * 
  * @author Nguyen Tran Duc Anh
  */
+@Entity
+@Table(name = "BM_Books")
+@PrimaryKeyJoinColumn(name = "product_id")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Book extends Product {
-    private Author author; // Author of the book
-    private String publisher; // Publisher of the book
-    private int yearPublished; // Year the book was published
-    private String language; // Language of the book
-    private String description; // Description of the book
-    private BookStatus status; // Status of the product (e.g., RUMOUR, AVAILABLE, OUT_OF_STOCK, DISCONTINUED)
 
     /**
      * Enum representing the status of a book product.
@@ -27,115 +29,25 @@ public class Book extends Product {
         RUMOUR, AVAILABLE, OUT_OF_STOCK, DISCONTINUED
     }
 
-    /**
-     * Default constructor for Book. Initializes with default values.
-     */
-    public Book(int status) {
-        super(0);
-        setStatus(status);
-    }
+    @ManyToOne
+    @JoinColumn (name = "author_id")
+    private Author author; // Author of the book
 
-    /**
-     * Constructor for creating a Book with essential attributes.
-     */
-    public Book(String id, String title, Author author, double price, int stockQuantity, int status) {
-        super(id, title, price, stockQuantity, 0);
-        setStatus(status);
-        this.author = author;
-    }
+    @Column (name = "publisher")
+    private String publisher; // Publisher of the book
 
-    /**
-     * Full constructor for creating a Book with all attributes.
-     */
-    public Book(String id, String title, Author author, double price, int stockQuantity,
-            String category, int status, String publisher, int yearPublished,
-            String language, String description, int discount, int totalSales, int totalStarRatings,
-            int numberOfRatings, double averageRating, Supplier supplier) {
-        super(id, title, price, stockQuantity, category, 0, discount, totalSales, totalStarRatings,
-                numberOfRatings, averageRating, supplier);
-        this.author = author;
-        this.publisher = publisher;
-        this.yearPublished = yearPublished;
-        this.language = language;
-        this.description = description;
-        setStatus(status);
-    }
+    @Column (name = "year_published")
+    private int yearPublished; // Year the book was published
 
-    // Getters and setters
-    public Author getAuthor() {
-        return author;
-    }
+    @Column (name = "language") 
+    private String language; // Language of the book
 
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
+    @Column (name = "description")
+    private String description; // Description of the book
 
-    public String getPublisher() {
-        return publisher;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private BookStatus status; // Status of the product (e.g., RUMOUR, AVAILABLE, OUT_OF_STOCK, DISCONTINUED)
 
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    public int getYearPublished() {
-        return yearPublished;
-    }
-
-    public void setYearPublished(int yearPublished) {
-        this.yearPublished = yearPublished;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
     
-    /**
-     * Get the status of the product as an integer for easier handling in UI and logic
-     */
-    public int getStatus() {
-        switch (status) {
-            case RUMOUR:
-                return 0;
-            case AVAILABLE:
-                return 1;
-            case OUT_OF_STOCK:
-                return 2;
-            default:
-                return 3; // DISCONTINUED
-        }
-    }
-
-    /**
-     * Set the status of the product using an integer value
-     * 0 = RUMOUR, 1 = AVAILABLE, 2 = OUT_OF_STOCK, 3 = DISCONTINUED
-     */
-    public void setStatus(int status) {
-        switch (status) {
-            case 0:
-                this.status = BookStatus.RUMOUR;
-                break;
-            case 1:
-                this.status = BookStatus.AVAILABLE;
-                break;
-            case 2:
-                this.status = BookStatus.OUT_OF_STOCK;
-                break;
-            default:
-                this.status = BookStatus.DISCONTINUED;
-                break;
-        }
-    }
 }

@@ -1,7 +1,12 @@
 package storemanagement.model.product;
 
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import java.time.LocalDate;
 
+import storemanagement.model.account.Customer;
 /**
  * Feedback class represents customer feedback for products in the bookstore
  * management system.
@@ -10,79 +15,31 @@ import java.time.LocalDate;
  * 
  * @author Nguyen Tran Duc Anh
  */
+@Entity
+@Table(name = "BM_Feedback")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Feedback {
+
+    @Id
+    @Column (name = "feedback_id")
     private String feedbackId; // Unique identifier for the feedback
-    private String productId; // Identifier for the product associated with this feedback
-    private String customerId; // Identifier for the customer who provided the feedback
+
+    @ManyToOne
+    @JoinColumn (name = "product_id")
+    private Product product; // Identifier for the product associated with this feedback
+
+    @ManyToOne
+    @JoinColumn (name = "customer_id")
+    private Customer customer; // Identifier for the customer who provided the feedback
+
+    @Column (name = "comment_text")
     private String comment; // Customer's comment about the product
+
+    @Column (name = "rating")
     private int rating; // Customer's rating for the product (e.g., 1 to 5)
+
+    @Column (name = "comment_date")
     private LocalDate date; // Date when the feedback was provided
-
-    /**
-     * Default constructor initializes the feedback with default values
-     */
-    public Feedback() {
-    }
-
-    /**
-     * Parameterized constructor to initialize all properties of the feedback
-     */
-    public Feedback(String feedbackId, String productId, String customerId, String comment, int rating,
-            LocalDate date) {
-        this.feedbackId = feedbackId;
-        this.productId = productId;
-        this.customerId = customerId;
-        this.comment = comment;
-        this.rating = rating;
-        this.date = date;
-    }
-
-    // Getters and Setters
-    public String getFeedbackId() {
-        return feedbackId;
-    }
-
-    public void setFeedbackId(String feedbackId) {
-        this.feedbackId = feedbackId;
-    }
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
 }
