@@ -1,41 +1,25 @@
 package storemanagement.model.catalog;
 
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
 /**
  * Author class represents an author in the bookstore management system. It has properties such as id and name.
  * @author Nguyen Tran Duc Anh
  */
+@Entity
+@Table(name = "BM_Author")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Author {
+
+    @Id
+    @Column (name = "author_id")
     private String id; // Unique identifier for the author
+
+    @Column (name = "name")
     private String name; // Name of the author
-
-    /**
-     * Default constructor for Author class
-     */
-    public Author() {
-    }
-
-    /**
-     * Parameterized constructor to initialize Author with id and name
-     */
-    public Author(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    // Getters and Setters
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id.trim();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name.trim();
-    }
 }
