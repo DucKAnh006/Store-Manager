@@ -1,6 +1,6 @@
 CREATE TABLE BM_Account (
     account_id VARCHAR(10) PRIMARY KEY NOT NULL,
-    name VARCHAR(255) NOT NULL,
+    name NVARCHAR(255) NOT NULL,
     account VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(20) NOT NULL
 );
@@ -8,6 +8,7 @@ CREATE TABLE BM_Account (
 CREATE TABLE BM_Customer (
     customer_id VARCHAR(10) PRIMARY KEY,
     phone_number VARCHAR(15) NOT NULL,
+    email VARCHAR(255) NOT NULL,
     loyalty_point INT DEFAULT 0,
 
     FOREIGN KEY (customer_id) REFERENCES BM_Account (account_id)
@@ -23,12 +24,12 @@ CREATE TABLE BM_Address (
 
 CREATE TABLE BM_Supplier (
     supplier_id VARCHAR(10) PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    name NVARCHAR(255) NOT NULL
 );
 
 CREATE TABLE BM_Product (
     product_id VARCHAR(10) PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    name NVARCHAR(255) NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     stock_quantity INT DEFAULT 0,
     category VARCHAR(100),
@@ -45,7 +46,7 @@ CREATE TABLE BM_Product (
 
 CREATE TABLE BM_Author (
     author_id VARCHAR(10) PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    name NVARCHAR(255) NOT NULL
 );
 
 CREATE TABLE BM_Books (
@@ -63,7 +64,7 @@ CREATE TABLE BM_Books (
 
 CREATE TABLE BM_Stationery (
     product_id VARCHAR(10) PRIMARY KEY,
-    manufacturer VARCHAR(255) NOT NULL,
+    manufacturer NVARCHAR(255) NOT NULL,
     material VARCHAR(255) NOT NULL,
 
     FOREIGN KEY (product_id) REFERENCES BM_Product (product_id)

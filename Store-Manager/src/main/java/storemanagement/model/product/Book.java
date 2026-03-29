@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 
 import storemanagement.model.catalog.Author;
 
@@ -17,6 +18,7 @@ import storemanagement.model.catalog.Author;
 @Entity
 @Table(name = "BM_Books")
 @PrimaryKeyJoinColumn(name = "product_id")
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -45,7 +47,7 @@ public class Book extends Product {
     @Column (name = "description")
     private String description; // Description of the book
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "status")
     private BookStatus status; // Status of the product (e.g., RUMOUR, AVAILABLE, OUT_OF_STOCK, DISCONTINUED)
 

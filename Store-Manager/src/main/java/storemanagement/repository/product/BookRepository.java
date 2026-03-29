@@ -1,8 +1,10 @@
 package storemanagement.repository.product;
 
-/**
- * @author Nguyen Tran Duc Anh
- */
-public class BookRepository {
-    
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import storemanagement.model.product.Book;
+
+@Repository
+public interface BookRepository extends JpaRepository<Book, String> {
 }

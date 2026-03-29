@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,8 @@ import java.util.List;
  */
 @Entity
 @Table(name = "BM_Combo")
-@PrimaryKeyJoinColumn(name = "product_id")
+@PrimaryKeyJoinColumn(name = "combo_id")
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
