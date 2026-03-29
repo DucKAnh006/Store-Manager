@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 
 /**
  * Represents non-book items like pens, rulers, toys, and souvenirs.
@@ -14,6 +15,7 @@ import lombok.AllArgsConstructor;
 @Entity
 @Table(name = "BM_Stationery")
 @PrimaryKeyJoinColumn(name = "product_id")
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

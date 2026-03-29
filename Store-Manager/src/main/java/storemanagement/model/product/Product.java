@@ -44,7 +44,7 @@ public abstract class Product {
     @Column(name = "category")
     private String category; // Category of the product (e.g., Fiction, Non-Fiction, Combo, Stationery)
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "product_type")
     private ProductType productType; // Type of product
 
