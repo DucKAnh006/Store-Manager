@@ -25,7 +25,7 @@ public class Combo extends Product {
 
     @ManyToMany
     @JoinTable(
-        name = "combo_product",
+        name = "BM_ComboDetail",
         joinColumns = @JoinColumn(name = "combo_id"),
         inverseJoinColumns = @JoinColumn(name = "product_id")
     )
