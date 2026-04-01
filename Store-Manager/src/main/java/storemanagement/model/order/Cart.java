@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import java.util.List;
 
-import storemanagement.model.account.Accounts;
+import storemanagement.model.account.Customer;
 
 /**
  * Represents a shopping cart holding various products and their quantities.
@@ -26,7 +26,7 @@ public class Cart {
 
     @OneToOne
     @JoinColumn (name = "customer_id")
-    private Accounts customer; // Unique identifier for the customer associated with this cart
+    private Customer customer; // Unique identifier for the customer associated with this cart
 
     @OneToMany
     @JoinTable(
