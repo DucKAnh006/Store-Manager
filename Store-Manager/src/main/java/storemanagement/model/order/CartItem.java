@@ -1,5 +1,11 @@
 package storemanagement.model.order;
 
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+
 import storemanagement.model.product.*;
 
 /**
@@ -8,57 +14,26 @@ import storemanagement.model.product.*;
  * update the total price whenever the product or quantity changes.
  * @author Nguyen Tran Duc Anh
  */
+@Entity 
+@Table (name = "BM_CartItem")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CartItem {
+    @JoinColumn (name = "product_id")
     private Product product; // The product associated with this cart item
+
+    @JoinColumn (name = "cart_id")
+    private Cart cart; // The cart to which this item belongs
+
+    @Column (name = "quantity")
     private int quantity; // Quantity of the product in the cart
+
+    @Column (name = "total_price")
     private double totalPrice; // Total price for this cart item (calculated as product price * quantity * (1 - discount))
+
+    @Column (name = "selected")
     private boolean selected; // Indicates whether this cart item is selected for checkout
-
-    /**
-     * Default constructor initializes the cart item with default values. Total price is calculated based on the product and quantity.
-     */
-    public CartItem() {
-    }
-
-    /**
-     * Parameterized constructor to initialize the cart item with a product and quantity. Total price is calculated based on the product and quantity.
-     */
-    public CartItem(Product product, int quantity) {
-        this.product = product;
-        this.quantity = quantity;
-        updateTotalPrice(); // Calculate total price
-    }
-
-    // Getters and Setters
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-        updateTotalPrice(); // Update total price when product changes
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-        updateTotalPrice(); // Update total price when quantity changes
-    }
-
-    public boolean isSelected() {
-        return selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
 
     /**
      * Private method to ensure consistency of total price. It calculates the total price based on the current product, quantity, price, and discount.
