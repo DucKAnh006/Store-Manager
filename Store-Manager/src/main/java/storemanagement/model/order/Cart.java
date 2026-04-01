@@ -1,85 +1,39 @@
 package storemanagement.model.order;
 
-import java.util.ArrayList;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import java.util.List;
+
+import storemanagement.model.account.Accounts;
 
 /**
  * Represents a shopping cart holding various products and their quantities.
  *
  * @author Nguyen Tran Duc Anh
  */
+@Entity
+@Table (name = "BM_Cart")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Cart {
-    private String customerId; // Unique identifier for the customer associated with this cart
-    private final List<CartItem> cartItems; // List to store items in the cart, each item includes product details and quantity
 
-    /**
-     * Constructor initializes an empty cart.
-     */
-    public Cart() {
-        // Initialize with an empty list to prevent NullPointerException
-        this.cartItems = new ArrayList<>();
-    }
+    @Id
+    @Column (name = "cart_id")
+    private String cartId; // unique identifier for the cart
 
-    // Getters and Setters
-    public List<CartItem> getCartItems() {
-        return cartItems;
-    }
+    @OneToOne
+    @JoinColumn (name = "customer_id")
+    private Accounts customer; // Unique identifier for the customer associated with this cart
 
-    public void setCartItems(List<CartItem> cartItems) {
-        this.cartItems.clear();
-        if (cartItems != null) {
-            this.cartItems.addAll(cartItems);
-        }
-    }
+    @OneToMany
+    @JoinTable(
+        name = "BM_CartItem",
+        joinColumns = @JoinColumn(name = "cart_id"),
+        inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<CartItem> cartItems; // List to store items in the cart, each item includes product details and quantity
 
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    // Business methods
-
-    /**
-     * Adds an item to the cart. If the item already exists, it updates the quantity.
-     * @param item
-     */
-    public void addItem(CartItem item) {
-        if (item != null) {
-            cartItems.add(item);
-        }
-    }
-
-    /**
-     * Removes an item from the cart.
-     */
-    public boolean removeItem(CartItem item) {
-        return cartItems.remove(item);
-    }
-
-    /**
-     * Calculates the total cost of the cart by summing up the total price of each selected cart item.
-     * * @return the total cost of the cart 
-     */
-    public double calculateCartTotal() {
-        double total = 0.0;
-        // Loop through the cart items
-        for (CartItem cartItem : cartItems) {
-            // Only include items that are selected for checkout
-            if (!cartItem.isSelected()){
-                continue;
-            }
-            total += cartItem.getTotalPrice(); // Use the total price from CartItem which already accounts for quantity and discount
-        }
-        return total;
-    }
-
-    /**
-     * Clears all items from the cart, effectively resetting it to an empty state.
-     */
-    public void clearCart() {
-        cartItems.clear();
-    }
 }
