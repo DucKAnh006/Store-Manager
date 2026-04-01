@@ -2,6 +2,7 @@ package storemanagement.model.order;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import storemanagement.model.account.Accounts;
 @Entity
 @Table (name = "BM_Cart")
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class Cart {
 
@@ -23,15 +25,15 @@ public class Cart {
     private String cartId; // unique identifier for the cart
 
     @OneToOne
-    @JoinColumn (name = "account_id")
+    @JoinColumn (name = "customer_id")
     private Accounts customer; // Unique identifier for the customer associated with this cart
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(
         name = "BM_CartItem",
         joinColumns = @JoinColumn(name = "cart_id"),
         inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private final List<CartItem> cartItems; // List to store items in the cart, each item includes product details and quantity
+    private List<CartItem> cartItems; // List to store items in the cart, each item includes product details and quantity
 
 }

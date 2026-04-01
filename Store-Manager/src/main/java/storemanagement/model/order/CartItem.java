@@ -20,9 +20,16 @@ import storemanagement.model.product.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CartItem {
+
+    @Id
+    @Column (name = "cart_item_id")
+    private String cartItemId; // Unique identifier for the cart item
+
+    @ManyToOne
     @JoinColumn (name = "product_id")
     private Product product; // The product associated with this cart item
 
+    @ManyToOne
     @JoinColumn (name = "cart_id")
     private Cart cart; // The cart to which this item belongs
 
