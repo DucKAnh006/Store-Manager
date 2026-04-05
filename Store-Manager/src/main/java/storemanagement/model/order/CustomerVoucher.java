@@ -1,5 +1,10 @@
 package storemanagement.model.order;
 
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
 /**
  * CustomerVoucher class represents the association between a customer and a
  * voucher. It can be used to track which vouchers have been assigned to which
@@ -9,49 +14,26 @@ package storemanagement.model.order;
  * 
  * @author Nguyen Tran Duc Anh
  */
+@Entity
+@Table (name = "BM_UsedVoucher")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CustomerVoucher {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id; // Unique identifier for the customer-voucher association
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
     private String customerId; // Identifier for the customer
+
+    @ManyToOne
+    @JoinColumn(name = "code")
     private String voucherCode; // Code of the voucher assigned to the customer
+
+    @Column (name = "is_used")
     private boolean isUsed; // Indicates whether the voucher has been used by the customer
-
-    /**
-     * Default constructor initializes the customer voucher with default values
-     */
-    public CustomerVoucher() {
-    }
-
-    /**
-     * Parameterized constructor to initialize all properties of the customer
-     * voucher
-     */
-    public CustomerVoucher(String customerId, String voucherCode, boolean isUsed) {
-        this.customerId = customerId;
-        this.voucherCode = voucherCode;
-        this.isUsed = isUsed;
-    }
-
-    // Getters and Setters
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getVoucherCode() {
-        return voucherCode;
-    }
-
-    public void setVoucherCode(String voucherCode) {
-        this.voucherCode = voucherCode;
-    }
-
-    public boolean isUsed() {
-        return isUsed;
-    }
-
-    public void setUsed(boolean isUsed) {
-        this.isUsed = isUsed;
-    }
 }
