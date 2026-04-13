@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import storemanagement.model.product.Stationery;
 
 /**
+ * Repository interface for managing Stationery entities in the database.
+ * 
  * @author Nguyen Tran Duc Anh
  */
 @Repository

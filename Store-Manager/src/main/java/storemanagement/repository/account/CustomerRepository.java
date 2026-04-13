@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import storemanagement.model.account.Customer;
 
 /**
+ * Repository interface for Customer entity, providing CRUD operations and database interactions.
+ * 
  * @author Nguyen Tran Duc Anh
  */
 @Repository
