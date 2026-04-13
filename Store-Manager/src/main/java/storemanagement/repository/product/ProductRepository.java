@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import storemanagement.model.product.Product;
 
 /**
+ * Repository interface for managing Product entities in the database.
+ * 
  * @author Nguyen Tran Duc Anh
  */
 @Repository

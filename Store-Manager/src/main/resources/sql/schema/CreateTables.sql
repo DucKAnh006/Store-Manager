@@ -78,13 +78,13 @@ CREATE TABLE BM_Combo (
 );
 
 CREATE TABLE BM_ComboDetail (
-    combo_product_id VARCHAR(10) NOT NULL,
+    product_id VARCHAR(10) NOT NULL,
     combo_id VARCHAR(10) NOT NULL,
 
     PRIMARY KEY (combo_product_id, combo_id),
 
     FOREIGN KEY (combo_id) REFERENCES BM_Combo (combo_id),
-    FOREIGN KEY (combo_product_id) REFERENCES BM_Product (product_id) 
+    FOREIGN KEY (product_id) REFERENCES BM_Product (product_id) 
 );
 
 CREATE TABLE BM_Cart (
@@ -95,13 +95,12 @@ CREATE TABLE BM_Cart (
 );
 
 CREATE TABLE BM_CartItem (
+    cart_item_id VARCHAR(10) PRIMARY KEY,
     cart_id VARCHAR(10) NOT NULL,
     product_id VARCHAR(10) NOT NULL,
     quantity INT DEFAULT 1,
     total_price DECIMAL(10, 2) NOT NULL,
     selected BIT DEFAULT 1,
-
-    PRIMARY KEY (cart_id, product_id),
 
     FOREIGN KEY (cart_id) REFERENCES BM_CART (cart_id),
     FOREIGN KEY (product_id) REFERENCES BM_Product (product_id)
@@ -127,11 +126,13 @@ CREATE TABLE BM_Order (
 );
 
 CREATE TABLE BM_OrderDetail (
+    order_detail_id INT IDENTITY(1,1) PRIMARY KEY,
     product_id VARCHAR(10),
     order_id VARCHAR(10),
     total_price DECIMAL(10, 2) NOT NULL,
     purchased_price DECIMAL(10, 2) NOT NULL,
     quantity INT,
+    unit_price DECIMAL(10, 2) NOT NULL,
 
     PRIMARY KEY (product_id, order_id),
 

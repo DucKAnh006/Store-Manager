@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import storemanagement.model.account.Address;
 
 /**
+ * Repository interface for managing Customer's Address entities in the database.
+ * 
  * @author Nguyen Tran Duc Anh
  */
 @Repository

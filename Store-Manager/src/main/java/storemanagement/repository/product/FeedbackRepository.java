@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import storemanagement.model.product.Feedback;
 
 /**
+ * Repository interface for managing Feedback entities in the database.
+ * 
  * @author Nguyen Tran Duc Anh
  */
 @Repository

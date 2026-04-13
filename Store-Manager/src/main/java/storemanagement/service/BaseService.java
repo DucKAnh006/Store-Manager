@@ -1,4 +1,4 @@
-package storemanagement.view;
+package storemanagement.service;
 
 public class BaseService {
     
